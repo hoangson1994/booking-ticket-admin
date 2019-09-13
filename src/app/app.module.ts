@@ -1,5 +1,4 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -12,6 +11,7 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {SharedModule} from './shared/shared.module';
 import {LoginComponent} from './modules/auth/login/login.component';
 import {VoyagesModule} from './modules/voyages/voyages.module';
+import {VehicleModule} from './modules/vehicle/vehicle.module';
 
 registerLocaleData(vi);
 
@@ -25,11 +25,11 @@ registerLocaleData(vi);
     ],
     imports: [
         SharedModule,
+        VehicleModule,
         VoyagesModule,
         AppRoutingModule
     ],
     providers: [{provide: NZ_I18N, useValue: vi_VN}],
     bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }

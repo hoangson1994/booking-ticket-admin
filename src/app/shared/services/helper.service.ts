@@ -1,14 +1,24 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpEventType, HttpRequest, HttpResponse } from '@angular/common/http';
-import { ACCESS_TOKEN_SECRET_KEY } from '../../resources/static.resource';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpEventType, HttpRequest, HttpResponse} from '@angular/common/http';
+import {ACCESS_TOKEN_SECRET_KEY, ERouters} from '../../resources/static.resource';
 import {AbstractControl, FormArray, FormGroup} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AuthService} from '../../modules/auth/auth.service';
+import {NzNotificationService} from 'ng-zorro-antd';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HelperService {
   private authorizeHeader;
-  constructor(private http: HttpClient) { }
+
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private authService: AuthService,
+    private notify: NzNotificationService
+  ) {
+  }
 
   /**
    * - Custom upload a img
@@ -113,19 +123,21 @@ export class HelperService {
     };
   }
 
-  // handleError(err) {
-  //   console.log(err);
-  //   if (err) {
-  //     if (err.status === 403) {
-  //       this.notify.error('Thất bại', 'Lỗi xác thực hoặc phiên làm việc đã hết hạn.');
-  //       this.router.navigate(['/' + ERouters.login]);
-  //       this.authService.logout();
-  //       return;
-  //     }
-  //   }
+  handleError(err) {
+    if (err) {
+      if (err.status === 401) {
+        this.notify.error('Thất bại', 'Lỗi xác thực hoặc phiên làm việc đã hết hạn.');
+        this.router.navigate(['/' + ERouters.login]);
+        return;
+      }
+    }
 
-  //   this.notify.error('Thất bại', 'Vui lòng thử lại sau');
-  // }
+    if (err.error) {
+      this.notify.error('Thất bại', err.error.message);
+      return;
+    }
+    this.notify.error('Thất bại', 'Vui lòng thử lại sau');
+  }
     getAsFormArray(form: FormGroup, name: string) {
       return form.get(name) as FormArray;
     }
