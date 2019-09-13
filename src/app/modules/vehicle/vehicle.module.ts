@@ -5,14 +5,16 @@ import { VehicleCategoryListComponent } from './vehicle-category-list/vehicle-ca
 import { VehiclesFormComponent } from './vehicles-form/vehicles-form.component';
 import { VehiclesListComponent } from './vehicles-list/vehicles-list.component';
 import {SharedModule} from '../../shared/shared.module';
+import {RouterModule} from '@angular/router';
+import {ROUTER_GROUPS} from '../../app-routing.module';
 
 
 
 @NgModule({
   declarations: [VehicleCategoryFormComponent, VehicleCategoryListComponent, VehiclesFormComponent, VehiclesListComponent],
   imports: [
-    CommonModule,
-    SharedModule
+      SharedModule,
+      RouterModule.forRoot([ROUTER_GROUPS.VEHICLE_GROUP])
   ]
 })
 export class VehicleModule { }
