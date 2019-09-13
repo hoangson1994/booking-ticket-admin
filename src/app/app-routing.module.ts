@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes, Route } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './shared/guards/auth.guard';
+import {VoyageFormComponent} from './modules/voyages/voyage-form/voyage-form.component';
 
 /**
  * - Router group để side bar có thể import và tự động điều chỉnh các phần tử.
@@ -39,6 +40,30 @@ export const ROUTER_GROUPS = {
         }
       },
     ] as Routes
+  },
+  VOYAGE_GROUP: {
+    name: 'Quản lý tuyến đường',
+    path: 'voyages',
+    children: [
+      {
+        path: 'create',
+        component: VoyageFormComponent,
+        data: {
+          name: 'Thêm tuyến đường',
+          icon: 'Dashboard',
+          display: true
+        }
+      },
+      {
+        path: 'login',
+        component: DashboardComponent,
+        data: {
+          name: 'Đăng nhập',
+          icon: 'Dashboard',
+          display: false
+        }
+      },
+    ] as Routes
   }
 };
 
@@ -46,7 +71,7 @@ const redirectRoute: Route = {
   path: '**',
   redirectTo: 'dashboard',
   pathMatch: 'full'
-}
+};
 
 @NgModule({
   imports: [RouterModule.forRoot([ROUTER_GROUPS.APP_GROUP, redirectRoute])],

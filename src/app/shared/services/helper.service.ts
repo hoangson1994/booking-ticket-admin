@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEventType, HttpRequest, HttpResponse } from '@angular/common/http';
 import { ACCESS_TOKEN_SECRET_KEY } from '../../resources/static.resource';
-import { AbstractControl, FormGroup } from '@angular/forms';
+import {AbstractControl, FormArray, FormGroup} from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -126,4 +126,7 @@ export class HelperService {
 
   //   this.notify.error('Thất bại', 'Vui lòng thử lại sau');
   // }
+    getAsFormArray(form: FormGroup, name: string) {
+      return form.get(name) as FormArray;
+    }
 }

@@ -35,16 +35,6 @@
       <div nz-col [nzSm]="24" [nzXs]="24" [nzMd]="17" [nzXl]="19" [nzXXl]="20" class="content-bg">
         <article class="content-container">
           <router-outlet></router-outlet>
-          <app-dashboard></app-dashboard>
-
-          <form [formGroup]="form" (submit)="submit()">
-            <!-- <input type="text" formControlName="image">
-            <nz-input-number formControlName="image"></nz-input-number> -->
-            <app-custom-image-upload formControlName="image" [mode]="'multi'" [limitImagesQuantity]="5">
-            </app-custom-image-upload>
-            <button>Submit</button>
-          </form>
-
         </article>
         <nz-footer class="text-center">Ant Design ©2017 Implement By Angular</nz-footer>
       </div>
