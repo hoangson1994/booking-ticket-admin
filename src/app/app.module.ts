@@ -24,9 +24,9 @@ registerLocaleData(vi);
         LoginComponent
     ],
     imports: [
-        SharedModule,
         VehicleModule,
         VoyagesModule,
+        SharedModule,
         AppRoutingModule
     ],
     providers: [{provide: NZ_I18N, useValue: vi_VN}],
