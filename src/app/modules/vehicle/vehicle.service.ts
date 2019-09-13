@@ -4,7 +4,7 @@ import {IVehicle} from '../../interfaces/vehicle.interface';
 import {FormBuilder, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {API_URL} from '../../resources/static.resource';
+import {API_URL, BASE_URL} from '../../resources/static.resource';
 import {map} from 'rxjs/operators';
 import {HelperService} from '../../shared/services/helper.service';
 
@@ -32,7 +32,7 @@ export class VehicleService {
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
-    private helps: HelperService
+    private helper: HelperService
   ) {
   }
 
@@ -40,7 +40,7 @@ export class VehicleService {
     return this.http
       .post<{ data: IVehicleCategory }>(`${API_URL}vehicle-categories`, value,
         {
-          headers: this.helps.getAuth()
+          headers: this.helper.getAuth()
         })
       .pipe(map(d => d.data));
   }
@@ -49,16 +49,44 @@ export class VehicleService {
     return this.http
       .post<{ data: IVehicle }>(`${API_URL}vehicles`, value,
         {
-          headers: this.helps.getAuth()
+          headers: this.helper.getAuth()
         })
       .pipe(map(d => d.data));
   }
 
   listVehicleCategories(): Observable<IVehicleCategory[]> {
     return this.http.get<{ datas: IVehicleCategory[] }>(`${API_URL}vehicle-categories`, {
-      headers: this.helps.getAuth()
+      headers: this.helper.getAuth()
     })
       .pipe(map(({datas}) => datas));
 
+  }
+
+  singleVehicleCategory(id) {
+    return this.http.get<{ data: IVehicleCategory }>(
+      `${API_URL}vehicle-categories/${id}`,
+      {
+        headers: this.helper.getAuth(),
+      }
+    ).pipe(map(({data}) => data));
+  }
+
+  editVehicleCategory(value, id) {
+    return this.http.put<{ data: IVehicleCategory }>(
+      `${API_URL}vehicle-categories/${id}`,
+      value,
+      {
+        headers: this.helper.getAuth(),
+      }
+    ).pipe(map(({data}) => data));
+  }
+
+  deleteVehicleCategory(id) {
+    return this.http.delete<{ data: IVehicleCategory }>(
+      `${API_URL}vehicle-categories/${id}`,
+      {
+        headers: this.helper.getAuth(),
+      }
+    ).pipe(map(({data}) => data));
   }
 }
