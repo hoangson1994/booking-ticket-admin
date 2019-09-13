@@ -4,9 +4,8 @@ import {IVehicle} from '../../interfaces/vehicle.interface';
 import {FormBuilder, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {IUser} from '../../interfaces/user.interface';
 import {API_URL} from '../../resources/static.resource';
-import {finalize, map} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {HelperService} from '../../shared/services/helper.service';
 
 @Injectable({
@@ -23,10 +22,10 @@ export class VehicleService {
   };
 
   formControlVehicle = {
-    vehicle_name: [null, [Validators.required]],
+    name: [null, [Validators.required]],
     plate: [null, [Validators.required]],
     color: [null, [Validators.required]],
-    vehicle_category_id: [null, [Validators.required]],
+    category_id: [null, [Validators.required]],
   };
 
 
@@ -42,6 +41,16 @@ export class VehicleService {
       .post<{ data: IVehicleCategory }>(`${API_URL}api/vehicle-categories`, value,
         {
           headers: this.helps.getAuth()
-        }).pipe(map(d => d.data));
+        })
+      .pipe(map(d => d.data));
+  }
+
+  createVehicle(value): Observable<IVehicle> {
+    return this.http
+      .post<{ data: IVehicle }>(`${API_URL}api/vehicles`, value,
+        {
+          headers: this.helps.getAuth()
+        })
+      .pipe(map(d => d.data));
   }
 }

@@ -3,11 +3,11 @@
     <form nz-form [formGroup]="form">
       <div nz-row [nzGutter]="12">
         <div nz-col [nzMd]="12">
-          <ng-container *ngIf="form.get('vehicle_name') as vehicle_name">
+          <ng-container *ngIf="form.get('name') as name">
             <nz-form-item>
               <nz-form-label><strong>Tên/Số hiệu xe</strong></nz-form-label>
               <nz-form-control [nzErrorTip]="vehicleNameValidate">
-                <input type="text" nz-input [formControl]="vehicle_name" class="w-100"/>
+                <input type="text" nz-input [formControl]="name" class="w-100" placeholder="Nhập tên xe"/>
               </nz-form-control>
               <ng-template #vehicleNameValidate>
                 Hãy nhập tên xe
@@ -20,7 +20,7 @@
             <nz-form-item nz-col [nzMd]="12">
               <nz-form-label><strong>Biển số xe</strong></nz-form-label>
               <nz-form-control [nzErrorTip]="plateValidate">
-                <input type="text" nz-input [formControl]="plate" class="w-100"/>
+                <input type="text" nz-input [formControl]="plate" class="w-100" placeholder="Nhập biển số xe"/>
               </nz-form-control>
               <ng-template #plateValidate>
                 Hãy nhập biển số xe
@@ -47,12 +47,12 @@
           </ng-container>
         </div>
         <div nz-col [nzMd]="12">
-          <ng-container *ngIf="form.get('vehicle_category_id') as vehicle_category_id">
+          <ng-container *ngIf="form.get('category_id') as category_id">
             <nz-form-item nz-col [nzMd]="12">
-              <nz-form-label><strong>Tên/Số hiệu xe</strong></nz-form-label>
+              <nz-form-label><strong>Nhóm xe</strong></nz-form-label>
               <nz-form-control [nzErrorTip]="vehicleCtValidate">
                 <input nz-input
-                       [formControl]="vehicle_category_id"
+                       [formControl]="category_id"
                        placeHolder="Tìm kiềm và chọn nhóm xe"
                        class="w-100"
                 />
@@ -66,7 +66,13 @@
       </div>
       <nz-form-item>
         <nz-form-control>
-          <button nz-button class="login-form-button w-100" [nzType]="'primary'">Lưu</button>
+          <button nz-button
+                  class="login-form-button w-100"
+                  [nzType]="'primary'"
+                  [disabled]="isPost"
+                  (click)="onSubmit()"
+          >Lưu
+          </button>
         </nz-form-control>
       </nz-form-item>
     </form>

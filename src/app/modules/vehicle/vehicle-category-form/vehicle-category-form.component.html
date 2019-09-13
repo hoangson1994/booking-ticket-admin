@@ -48,7 +48,9 @@
                   class="login-form-button w-100"
                   [nzType]="'primary'"
                   (click)="onSubmit()"
-          >Lưu</button>
+                  [disabled]="isPost"
+          >Lưu
+          </button>
         </nz-form-control>
       </nz-form-item>
     </form>
