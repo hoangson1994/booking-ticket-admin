@@ -47,10 +47,18 @@ export class VehicleService {
 
   createVehicle(value): Observable<IVehicle> {
     return this.http
-      .post<{ data: IVehicle }>(`${API_URL}api/vehicles`, value,
+      .post<{ data: IVehicle }>(`${API_URL}vehicles`, value,
         {
           headers: this.helps.getAuth()
         })
       .pipe(map(d => d.data));
+  }
+
+  listVehicleCategories(): Observable<IVehicleCategory[]> {
+    return this.http.get<{ datas: IVehicleCategory[] }>(`${API_URL}vehicle-categories`, {
+      headers: this.helps.getAuth()
+    })
+      .pipe(map(({datas}) => datas));
+
   }
 }

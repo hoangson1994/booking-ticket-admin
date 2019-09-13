@@ -51,11 +51,9 @@
             <nz-form-item nz-col [nzMd]="12">
               <nz-form-label><strong>Nhóm xe</strong></nz-form-label>
               <nz-form-control [nzErrorTip]="vehicleCtValidate">
-                <input nz-input
-                       [formControl]="category_id"
-                       placeHolder="Tìm kiềm và chọn nhóm xe"
-                       class="w-100"
-                />
+                <app-vehicle-category-selector [formControl]="category_id">
+
+                </app-vehicle-category-selector>
               </nz-form-control>
               <ng-template #vehicleCtValidate>
                 Hãy nhập nhóm xe
