@@ -4,9 +4,8 @@ import {IVehicle} from '../../interfaces/vehicle.interface';
 import {FormBuilder, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {IUser} from '../../interfaces/user.interface';
-import {API_URL} from '../../resources/static.resource';
-import {finalize, map} from 'rxjs/operators';
+import {API_URL, BASE_URL} from '../../resources/static.resource';
+import {map} from 'rxjs/operators';
 import {HelperService} from '../../shared/services/helper.service';
 
 @Injectable({
@@ -23,17 +22,17 @@ export class VehicleService {
   };
 
   formControlVehicle = {
-    vehicle_name: [null, [Validators.required]],
+    name: [null, [Validators.required]],
     plate: [null, [Validators.required]],
     color: [null, [Validators.required]],
-    vehicle_category_id: [null, [Validators.required]],
+    category_id: [null, [Validators.required]],
   };
 
 
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
-    private helps: HelperService
+    private helper: HelperService
   ) {
   }
 
@@ -41,7 +40,53 @@ export class VehicleService {
     return this.http
       .post<{ data: IVehicleCategory }>(`${API_URL}vehicle-categories`, value,
         {
-          headers: this.helps.getAuth()
-        }).pipe(map(d => d.data));
+          headers: this.helper.getAuth()
+        })
+      .pipe(map(d => d.data));
+  }
+
+  createVehicle(value): Observable<IVehicle> {
+    return this.http
+      .post<{ data: IVehicle }>(`${API_URL}vehicles`, value,
+        {
+          headers: this.helper.getAuth()
+        })
+      .pipe(map(d => d.data));
+  }
+
+  listVehicleCategories(): Observable<IVehicleCategory[]> {
+    return this.http.get<{ datas: IVehicleCategory[] }>(`${API_URL}vehicle-categories`, {
+      headers: this.helper.getAuth()
+    })
+      .pipe(map(({datas}) => datas));
+
+  }
+
+  singleVehicleCategory(id) {
+    return this.http.get<{ data: IVehicleCategory }>(
+      `${API_URL}vehicle-categories/${id}`,
+      {
+        headers: this.helper.getAuth(),
+      }
+    ).pipe(map(({data}) => data));
+  }
+
+  editVehicleCategory(value, id) {
+    return this.http.put<{ data: IVehicleCategory }>(
+      `${API_URL}vehicle-categories/${id}`,
+      value,
+      {
+        headers: this.helper.getAuth(),
+      }
+    ).pipe(map(({data}) => data));
+  }
+
+  deleteVehicleCategory(id) {
+    return this.http.delete<{ data: IVehicleCategory }>(
+      `${API_URL}vehicle-categories/${id}`,
+      {
+        headers: this.helper.getAuth(),
+      }
+    ).pipe(map(({data}) => data));
   }
 }

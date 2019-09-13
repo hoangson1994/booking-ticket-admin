@@ -5,5 +5,11 @@ export interface IVehicleCategory {
   price: number;
   created_at: string;
   updated_at: string;
-  status: number;
+  status: VehicleCategoryStatus;
+  isDeleting: boolean;
+}
+
+export enum VehicleCategoryStatus {
+  active = 1,
+  inactive = -1
 }

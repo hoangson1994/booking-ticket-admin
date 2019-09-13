@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslatePipe } from './pipes/translate.pipe';
 import { CustomImageUploadComponent } from './components/custom-image-upload/custom-image-upload.component';
 import { RegionSelectorComponent } from './selector/region-selector/region-selector.component';
+import { VehicleCategorySelectorComponent } from './selector/vehicle-category-selector/vehicle-category-selector.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { RegionSelectorComponent } from './selector/region-selector/region-selec
   declarations: [
     TranslatePipe,
     CustomImageUploadComponent,
-    RegionSelectorComponent
+    RegionSelectorComponent,
+    VehicleCategorySelectorComponent
   ],
   exports: [
     CommonModule,
@@ -35,6 +37,7 @@ import { RegionSelectorComponent } from './selector/region-selector/region-selec
     TranslatePipe,
     CustomImageUploadComponent,
     RegionSelectorComponent,
+    VehicleCategorySelectorComponent,
   ]
 })
 export class SharedModule { }
