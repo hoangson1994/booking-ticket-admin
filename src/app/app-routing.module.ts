@@ -1,7 +1,11 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes, Route } from '@angular/router';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { AuthGuard } from './shared/guards/auth.guard';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes, Route} from '@angular/router';
+import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {LoginComponent} from './modules/auth/login/login.component';
+import {VehicleCategoryFormComponent} from './modules/vehicle/vehicle-category-form/vehicle-category-form.component';
+import {VehicleCategoryListComponent} from './modules/vehicle/vehicle-category-list/vehicle-category-list.component';
+import {VehiclesListComponent} from './modules/vehicle/vehicles-list/vehicles-list.component';
+import {VehiclesFormComponent} from './modules/vehicle/vehicles-form/vehicles-form.component';
 
 /**
  * - Router group để side bar có thể import và tự động điều chỉnh các phần tử.
@@ -13,14 +17,6 @@ export const ROUTER_GROUPS = {
     path: '',
     children: [
       {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
-        data: {
-          display: false
-        }
-      },
-      {
         path: 'dashboard',
         component: DashboardComponent,
         data: {
@@ -30,12 +26,59 @@ export const ROUTER_GROUPS = {
         }
       },
       {
-        path: 'login',
-        component: DashboardComponent,
+        path: 'auth/login',
+        component: LoginComponent,
         data: {
           name: 'Đăng nhập',
-          icon: 'Dashboard',
+          icon: 'Login',
           display: false
+        }
+      },
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+        data: {
+          display: false
+        }
+      },
+    ] as Routes
+  },
+  VEHICLE_GROUP: {
+    name: 'Nhóm xe',
+    path: 'vehicles',
+    children: [
+      {
+        path: 'vehicle-category-form',
+        component: VehicleCategoryFormComponent,
+        data: {
+          name: 'Thêm nhóm xe',
+          icon: '',
+          display: true
+        }
+      }, {
+        path: 'vehicle-category-list',
+        component: VehicleCategoryListComponent,
+        data: {
+          name: 'Danh sách nhóm xe',
+          icon: '',
+          display: true
+        }
+      }, {
+        path: 'vehicle-list',
+        component: VehiclesListComponent,
+        data: {
+          name: 'Danh sách xe',
+          icon: '',
+          display: true
+        }
+      }, {
+        path: 'vehicle-form',
+        component: VehiclesFormComponent,
+        data: {
+          name: 'Thêm xe',
+          icon: '',
+          display: true
         }
       },
     ] as Routes
@@ -46,10 +89,13 @@ const redirectRoute: Route = {
   path: '**',
   redirectTo: 'dashboard',
   pathMatch: 'full'
-}
+};
 
 @NgModule({
-  imports: [RouterModule.forRoot([ROUTER_GROUPS.APP_GROUP, redirectRoute])],
+  imports: [RouterModule.forRoot(
+    [ROUTER_GROUPS.APP_GROUP, ROUTER_GROUPS.VEHICLE_GROUP, redirectRoute]
+  )],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

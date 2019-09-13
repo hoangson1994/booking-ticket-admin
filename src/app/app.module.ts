@@ -1,4 +1,3 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +9,8 @@ import { HeaderComponent } from './layouts/header/header.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SharedModule } from './shared/shared.module';
+import {LoginComponent} from './modules/auth/login/login.component';
+import {VehicleModule} from './modules/vehicle/vehicle.module';
 
 registerLocaleData(vi);
 
@@ -18,9 +19,11 @@ registerLocaleData(vi);
     AppComponent,
     HeaderComponent,
     SidebarComponent,
-    DashboardComponent
+    DashboardComponent,
+    LoginComponent
   ],
   imports: [
+    VehicleModule,
     SharedModule,
     AppRoutingModule
   ],
