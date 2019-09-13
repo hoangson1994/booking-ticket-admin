@@ -1,6 +1,6 @@
 export const DOMAIN = 'http://34.87.118.132/';
 // export const DOMAIN = 'http://localhost:8000/';
-export const API_URL = DOMAIN ;
+export const API_URL = `${DOMAIN}api/` ;
 export const BASE_URL = `${DOMAIN}api/admin/`;
 
 export const ACCESS_TOKEN_SECRET_KEY = '12asf47asj123kfhc17mxzbja0131klj';

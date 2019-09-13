@@ -3,7 +3,7 @@ import {IUser} from '../../interfaces/user.interface';
 import {HttpClient} from '@angular/common/http';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
-import {API_URL} from '../../resources/static.resource';
+import {API_URL, DOMAIN} from '../../resources/static.resource';
 import {NzNotificationService} from 'ng-zorro-antd';
 import {Router} from '@angular/router';
 import {map, shareReplay} from 'rxjs/operators';
@@ -30,7 +30,7 @@ export class AuthService {
   login(value): Observable<IUser> {
     if (!this.observable) {
       this.observable = this.http
-        .post<{ data: IUser }>(`${API_URL}auth/login`, value)
+        .post<{ data: IUser }>(`${DOMAIN}auth/login`, value)
         .pipe(
           map(d => d.data),
           shareReplay()

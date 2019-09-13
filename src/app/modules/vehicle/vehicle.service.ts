@@ -38,7 +38,7 @@ export class VehicleService {
 
   createVehicleCategory(value): Observable<IVehicleCategory> {
     return this.http
-      .post<{ data: IVehicleCategory }>(`${API_URL}api/vehicle-categories`, value,
+      .post<{ data: IVehicleCategory }>(`${API_URL}vehicle-categories`, value,
         {
           headers: this.helps.getAuth()
         })

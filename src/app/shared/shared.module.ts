@@ -7,6 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslatePipe } from './pipes/translate.pipe';
 import { CustomImageUploadComponent } from './components/custom-image-upload/custom-image-upload.component';
+import { RegionSelectorComponent } from './selector/region-selector/region-selector.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,11 @@ import { CustomImageUploadComponent } from './components/custom-image-upload/cus
     BrowserModule,
     BrowserAnimationsModule
   ],
-  declarations: [TranslatePipe, CustomImageUploadComponent],
+  declarations: [
+    TranslatePipe,
+    CustomImageUploadComponent,
+    RegionSelectorComponent
+  ],
   exports: [
     CommonModule,
     HttpClientModule,
@@ -28,7 +33,8 @@ import { CustomImageUploadComponent } from './components/custom-image-upload/cus
     BrowserModule,
     BrowserAnimationsModule,
     TranslatePipe,
-    CustomImageUploadComponent
+    CustomImageUploadComponent,
+    RegionSelectorComponent,
   ]
 })
 export class SharedModule { }

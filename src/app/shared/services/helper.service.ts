@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpEventType, HttpRequest, HttpResponse} from '@angular/common/http';
 import {ACCESS_TOKEN_SECRET_KEY, ERouters} from '../../resources/static.resource';
-import {AbstractControl, FormGroup} from '@angular/forms';
+import {AbstractControl, FormArray, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../../modules/auth/auth.service';
 import {NzNotificationService} from 'ng-zorro-antd';
@@ -118,7 +118,7 @@ export class HelperService {
       if (password === confirmPassword) {
         return null; // All ok, passwords match!!!
       } else {
-        return {comparePassword: true};
+        return { comparePassword: true };
       }
     };
   }
@@ -138,4 +138,7 @@ export class HelperService {
     }
     this.notify.error('Thất bại', 'Vui lòng thử lại sau');
   }
+    getAsFormArray(form: FormGroup, name: string) {
+      return form.get(name) as FormArray;
+    }
 }

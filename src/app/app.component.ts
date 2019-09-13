@@ -3,6 +3,7 @@ import { Router, RouterEvent, NavigationEnd } from '@angular/router';
 import { ROUTER_GROUPS } from './app-routing.module';
 import { Title } from '@angular/platform-browser';
 import { FormGroup, FormControl } from '@angular/forms';
+import {AuthService} from './modules/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,11 @@ export class AppComponent implements OnInit {
   });
   drawerSidebarVisible = false;
   isMobileScreen = false;
-  constructor(private router: Router, private title: Title) { }
+  constructor(
+      private router: Router,
+      private title: Title,
+      private authService: AuthService
+  ) { }
   ngOnInit(): void {
     this.onResize();
     this.router.events.subscribe((ev: RouterEvent) => {
