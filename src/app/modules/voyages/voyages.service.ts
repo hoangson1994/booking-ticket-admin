@@ -12,7 +12,7 @@ export class VoyagesService {
     voyagePartFormControl = {
         fromId: [null, [Validators.required]],
         toId: [null, [Validators.required]],
-        distance: [null, Validators.required, Validators.min(0)]
+        distance: [null, [Validators.required, Validators.min(0)]]
     };
 
     constructor(
@@ -35,10 +35,7 @@ export class VoyagesService {
         return this.fb.group(this.voyagePartFormControl);
     }
 
-    async create(value) {
-        const data = {
-            voyages: value.voyages.map(voyage => voyage.region_id)
-        };
-        return this.http.post(`${API_URL}/voyages`, data, {headers: this.helper.getAuth()});
+    create(value) {
+        return this.http.post(`${API_URL}voyages`, value, {headers: this.helper.getAuth()});
     }
 }

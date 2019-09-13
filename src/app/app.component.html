@@ -31,13 +31,19 @@
            [nzXs]="0" [nzMd]="7"
            [nzXl]="5" [nzXXl]="4"
            class="sidebar-bg"
-           *ngIf="!isMobileScreen && authService.user">
+           *ngIf="!isMobileScreen">
+<!--           *ngIf="!isMobileScreen && authService.user">-->
         <nz-affix>
           <app-sidebar></app-sidebar>
         </nz-affix>
       </div>
-      <div nz-col [nzSm]="24" [nzXs]="24" [nzMd]="authService.user ? 17 : 24"
-           [nzXl]="authService.user ? 19 : 24" [nzXXl]="authService.user ? 20 : 24" class="content-bg">
+      <div class="content-bg" nz-col [nzSm]="24" [nzXs]="24"
+           [nzMd]="17"
+           [nzXl]="19"
+           [nzXXl]="20" >
+<!--           [nzMd]="authService.user ? 17 : 24"-->
+<!--           [nzXl]="authService.user ? 19 : 24"-->
+<!--           [nzXXl]="authService.user ? 20 : 24" >-->
         <article class="content-container">
           <router-outlet></router-outlet>
         </article>

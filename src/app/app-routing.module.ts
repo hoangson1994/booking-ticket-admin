@@ -30,7 +30,7 @@ export const ROUTER_GROUPS = {
         component: DashboardComponent,
         data: {
           name: 'Dashboard',
-          icon: 'Dashboard',
+          icon: 'area-chart',
           display: true
         }
       },
@@ -93,7 +93,7 @@ export const ROUTER_GROUPS = {
                 component: VoyageFormComponent,
                 data: {
                     name: 'Thêm tuyến đường',
-                    icon: 'Dashboard',
+                    icon: 'plus',
                     display: true
                 }
             },
