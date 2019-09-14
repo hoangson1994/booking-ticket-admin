@@ -62,6 +62,13 @@ export class VehicleService {
 
   }
 
+  listVehicle(): Observable<IVehicle[]> {
+    return this.http.get<{ datas: IVehicle[] }>(`${API_URL}vehicles`, {
+      headers: this.helper.getAuth()
+    })
+      .pipe(map(({datas}) => datas));
+  }
+
   singleVehicleCategory(id) {
     return this.http.get<{ data: IVehicleCategory }>(
       `${API_URL}vehicle-categories/${id}`,
@@ -87,6 +94,13 @@ export class VehicleService {
       {
         headers: this.helper.getAuth(),
       }
+    ).pipe(map(({data}) => data));
+  }
+
+  deleteVehicle(id) {
+    return this.http.delete<{ data: IVehicle }>(
+      `${API_URL}vehicles/${id}`,
+      {headers: this.helper.getAuth()}
     ).pipe(map(({data}) => data));
   }
 }

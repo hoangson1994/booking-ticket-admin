@@ -8,4 +8,9 @@ export interface IVehicle {
   created_at: string;
   updated_at: string;
   status: number;
+  isDeleting: boolean;
+}
+export enum VehicleStatus {
+  active = 1,
+  inactive = -1
 }

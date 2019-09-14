@@ -16,7 +16,6 @@ export class VehicleCategoryListComponent implements OnInit {
   isLoading: boolean;
   datas: IVehicleCategory[];
   vehicleCategoryStatus = VehicleCategoryStatus;
-  eRouters = ERouters;
 
   constructor(
     private service: VehicleService,

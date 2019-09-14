@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {NzNotificationService} from 'ng-zorro-antd';
 import {HelperService} from '../../../shared/services/helper.service';
 import {finalize} from 'rxjs/operators';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-vehicle-category-form',
@@ -19,11 +20,14 @@ export class VehicleCategoryFormComponent implements OnInit {
     private fb: FormBuilder,
     private notify: NzNotificationService,
     private helps: HelperService,
+    private activatedRoute: ActivatedRoute
   ) {
     this.form = this.fb.group(vehicleService.formControlVehicleCategory);
+    console.log(this.activatedRoute.params.value.id);
   }
 
   ngOnInit() {
+    // activatedroute
   }
 
 
