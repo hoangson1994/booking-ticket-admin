@@ -1,14 +1,13 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes, Route} from '@angular/router';
-import {DashboardComponent} from './components/dashboard/dashboard.component';
-import {AuthGuard} from './shared/guards/auth.guard';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes, Route } from '@angular/router';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AuthGuard } from './shared/guards/auth.guard';
 import {VoyageFormComponent} from './modules/voyages/voyage-form/voyage-form.component';
 import {LoginComponent} from './modules/auth/login/login.component';
 import {VehicleCategoryFormComponent} from './modules/vehicle/vehicle-category-form/vehicle-category-form.component';
 import {VehicleCategoryListComponent} from './modules/vehicle/vehicle-category-list/vehicle-category-list.component';
 import {VehiclesListComponent} from './modules/vehicle/vehicles-list/vehicles-list.component';
 import {VehiclesFormComponent} from './modules/vehicle/vehicles-form/vehicles-form.component';
-
 /**
  * - Router group để side bar có thể import và tự động điều chỉnh các phần tử.
  * - Các module con sẽ lấy từng phần tử con của router groups để routing riêng
@@ -31,7 +30,7 @@ export const ROUTER_GROUPS = {
         component: DashboardComponent,
         data: {
           name: 'Dashboard',
-          icon: 'Dashboard',
+          icon: 'area-chart',
           display: true
         }
       },
@@ -128,7 +127,7 @@ const redirectRoute: Route = {
 };
 
 @NgModule({
-  imports: [RouterModule.forRoot([ROUTER_GROUPS.APP_GROUP, ROUTER_GROUPS.VEHICLE_GROUP, redirectRoute])],
+  imports: [RouterModule.forRoot([ROUTER_GROUPS.APP_GROUP, redirectRoute])],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

@@ -3,7 +3,7 @@ import {IUser} from '../../interfaces/user.interface';
 import {HttpClient} from '@angular/common/http';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
-import {API_URL, DOMAIN} from '../../resources/static.resource';
+import {ACCESS_TOKEN_SECRET_KEY, API_URL, DOMAIN} from '../../resources/static.resource';
 import {NzNotificationService} from 'ng-zorro-antd';
 import {Router} from '@angular/router';
 import {map, shareReplay} from 'rxjs/operators';
@@ -46,6 +46,35 @@ export class AuthService {
       });
     }
 
+    return this.observable;
+  }
+
+  userData(): Observable<IUser> {
+    if (!this.observable) {
+      this.observable = this.http
+          .get<{ data: IUser }>(
+              `${API_URL}auth/user-data`,
+              {
+                headers: {
+                  authorization: localStorage.getItem(ACCESS_TOKEN_SECRET_KEY),
+                  'Content-Type': 'application/json'
+                }
+              }
+          )
+          .pipe(
+              map(d => d.data),
+              shareReplay()
+          );
+
+      this.observable.subscribe({
+        next: value => {
+          this.user = value;
+        },
+        error: err => {
+          this.observable = null;
+        }
+      });
+    }
     return this.observable;
   }
 }

@@ -44,6 +44,31 @@ export class VoyageFormComponent implements OnInit {
     }
 
     submitForm() {
+        this.helper.setDirtyAForm(this.voyageForm);
+        if (this.voyageForm.invalid) {
+            return;
+        }
+        const voyageParts = this.voyageForm.get('voyagePartRequests') as FormArray;
+        for (const part of voyageParts.controls) {
+            //tslint:disable
+            const _part = part as FormGroup;
+            this.helper.setDirtyAForm(_part);
+            if (_part.invalid) {
+                return;
+            }
+        }
 
+        console.log(this.voyageForm.value);
+
+        this.service
+            .create(this.voyageForm.value)
+            .subscribe({
+                next: value => {
+                    this.notify.success('Thành công', 'Thêm tuyến đường thành công');
+                },
+                error: err => {
+                    this.helper.handleError(err);
+                }
+            })
     }
 }

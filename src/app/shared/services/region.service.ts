@@ -31,16 +31,16 @@ export class RegionService {
     districts(province_id) {
         return this.http.get<{ datas: IDistrict[] }>(`${API_URL}region/districts`,
             {
-                params: {province_id},
+                params: {provinceId: province_id},
                 headers: this.helper.getAuth()
             }
         );
     }
 
     streets(district_id) {
-        return this.http.get<{ datas: IStreet[] }>(`${API_URL}region/districts`,
+        return this.http.get<{ datas: IStreet[] }>(`${API_URL}region/streets`,
             {
-                params: {district_id},
+                params: {districtId: district_id},
                 headers: this.helper.getAuth()
             }
         );
