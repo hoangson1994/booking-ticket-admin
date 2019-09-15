@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {NzNotificationService} from 'ng-zorro-antd';
 import {HelperService} from '../../../shared/services/helper.service';
 import {finalize} from 'rxjs/operators';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {IVehicleCategory} from '../../../interfaces/vehicle-category.interface';
 
 @Component({
@@ -24,7 +24,8 @@ export class VehicleCategoryFormComponent implements OnInit {
     private fb: FormBuilder,
     private notify: NzNotificationService,
     private helps: HelperService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
     this.form = this.fb.group(vehicleService.formControlVehicleCategory);
     this.activatedRoute.params.subscribe({
@@ -50,8 +51,12 @@ export class VehicleCategoryFormComponent implements OnInit {
       .singleVehicleCategory(id)
       .subscribe({
         next: value => {
-          this.vehicleCategory = value;
-          console.log(this.vehicleCategory);
+          this.form.patchValue(
+            {
+              'name': value.name,
+              'seatQuantity': value.seatQuantity,
+              'price': value.price
+            });
         },
         error: err => {
           this.helps.handleError(err);
@@ -83,6 +88,19 @@ export class VehicleCategoryFormComponent implements OnInit {
       return;
     }
     this.isPost = true;
-    console.log('edit');
+    this.vehicleService.editVehicleCategory(this.form.value, this.id)
+      .pipe(
+        finalize(() => {
+          this.isPost = false;
+        })
+      )
+      .subscribe({
+        next: value => {
+          this.notify.success('Thành công', 'Sửa nhóm xe thành công');
+          this.router.navigate(['/vehicles/vehicle-category-list']);
+        }, error: err => {
+          this.helps.handleError(err);
+        }
+      });
   }
 }
