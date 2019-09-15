@@ -7,7 +7,9 @@
             <nz-form-item>
               <nz-form-label><strong>Tên nhóm xe</strong></nz-form-label>
               <nz-form-control [nzErrorTip]="nameValidate">
-                <input type="text" nz-input [formControl]="name" placeholder="Tên nhóm xe"/>
+                <input type="text" nz-input
+                       [formControl]="name"
+                       placeholder="Tên nhóm xe"/>
               </nz-form-control>
               <ng-template #nameValidate>
                 Hãy nhập tên nhóm xe
@@ -20,7 +22,9 @@
             <nz-form-item>
               <nz-form-label><strong>Số chỗ ngồi</strong></nz-form-label>
               <nz-form-control [nzErrorTip]="seatQuantityValidate">
-                <nz-input-number nz-input [formControl]="seatQuantity" class="w-100"></nz-input-number>
+                <nz-input-number nz-input
+                                 [formControl]="seatQuantity"
+                                 class="w-100"></nz-input-number>
               </nz-form-control>
               <ng-template #seatQuantityValidate>
                 Hãy nhập số chỗ ngồi
@@ -47,7 +51,7 @@
           <button nz-button
                   class="login-form-button w-100"
                   [nzType]="'primary'"
-                  (click)="onSubmit()"
+                  (click)="isSubmit ? onSubmit() : onEdit()"
                   [disabled]="isPost"
           >Lưu
           </button>

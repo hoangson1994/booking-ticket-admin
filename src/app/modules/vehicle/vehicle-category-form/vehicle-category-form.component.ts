@@ -4,7 +4,8 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {NzNotificationService} from 'ng-zorro-antd';
 import {HelperService} from '../../../shared/services/helper.service';
 import {finalize} from 'rxjs/operators';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Params} from '@angular/router';
+import {IVehicleCategory} from '../../../interfaces/vehicle-category.interface';
 
 @Component({
   selector: 'app-vehicle-category-form',
@@ -14,6 +15,9 @@ import {ActivatedRoute} from '@angular/router';
 export class VehicleCategoryFormComponent implements OnInit {
   form: FormGroup;
   isPost = false;
+  isSubmit = true;
+  vehicleCategory: IVehicleCategory;
+  id: Params;
 
   constructor(
     private vehicleService: VehicleService,
@@ -23,13 +27,37 @@ export class VehicleCategoryFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.form = this.fb.group(vehicleService.formControlVehicleCategory);
-    console.log(this.activatedRoute.params.value.id);
+    this.activatedRoute.params.subscribe({
+      next: value => {
+        this.id = value.id;
+      },
+      error: err => {
+        this.helps.handleError(err);
+      }
+    });
+    if (this.id !== undefined) {
+      this.isSubmit = false;
+      this.selectVehicleCategory(this.id);
+    }
   }
 
   ngOnInit() {
     // activatedroute
   }
 
+  selectVehicleCategory(id) {
+    this.vehicleService
+      .singleVehicleCategory(id)
+      .subscribe({
+        next: value => {
+          this.vehicleCategory = value;
+          console.log(this.vehicleCategory);
+        },
+        error: err => {
+          this.helps.handleError(err);
+        }
+      });
+  }
 
   onSubmit() {
     if (this.form.invalid) {
@@ -48,5 +76,13 @@ export class VehicleCategoryFormComponent implements OnInit {
           }
         }
       );
+  }
+
+  onEdit() {
+    if (this.form.invalid) {
+      return;
+    }
+    this.isPost = true;
+    console.log('edit');
   }
 }
