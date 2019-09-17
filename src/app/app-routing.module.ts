@@ -14,122 +14,129 @@ import {VehiclesFormComponent} from './modules/vehicle/vehicles-form/vehicles-fo
  * - Các module con sẽ lấy từng phần tử con của router groups để routing riêng
  */
 export const ROUTER_GROUPS = {
-  APP_GROUP: {
-    name: null,
-    path: '',
-    children: [
-      {
+    APP_GROUP: {
+        name: null,
         path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
-        data: {
-          display: false
-        }
-      },
-      {
-        path: 'dashboard',
-        component: DashboardComponent,
-        data: {
-          name: 'Dashboard',
-          icon: 'area-chart',
-          display: true
-        }
-      },
-      {
-        path: 'auth/login',
-        component: LoginComponent,
-        data: {
-          name: 'Đăng nhập',
-          icon: 'Dashboard',
-          display: false
-        }
-      },
-    ] as Routes
-  },
-  VEHICLE_GROUP: {
-    name: 'Nhóm xe',
-    path: 'vehicles',
-    children: [
-      {
-        path: 'edit-vehicle-category/:id',
-        component: VehicleCategoryFormComponent,
-        data: {
-          name: 'Sửa nhóm xe',
-          icon: '',
-          display: false
-        }
-      },
-      {
-        path: 'vehicle-category-form',
-        component: VehicleCategoryFormComponent,
-        data: {
-          name: 'Thêm nhóm xe',
-          icon: '',
-          display: true
-        }
-      },
-      {
-        path: 'vehicle-category-list',
-        component: VehicleCategoryListComponent,
-        data: {
-          name: 'Danh sách nhóm xe',
-          icon: '',
-          display: true
-        }
-      }, {
-        path: 'vehicle-list',
-        component: VehiclesListComponent,
-        data: {
-          name: 'Danh sách xe',
-          icon: '',
-          display: true
-        }
-      }, {
-        path: 'vehicle-form',
-        component: VehiclesFormComponent,
-        data: {
-          name: 'Thêm xe',
-          icon: '',
-          display: true
-        }
-      },
-    ] as Routes
-  },
-  VOYAGE_GROUP: {
-    name: 'Quản lý tuyến đường',
-    path: 'voyages',
-    children: [
-      {
-        path: 'create',
-        component: VoyageFormComponent,
-        data: {
-          name: 'Thêm tuyến đường',
-          icon: 'Dashboard',
-          display: true
-        }
-      },
-      {
-        path: 'login',
-        component: DashboardComponent,
-        data: {
-          name: 'Đăng nhập',
-          icon: 'Dashboard',
-          display: false
-        }
-      },
-    ] as Routes
-  }
+        children: [
+            {
+                path: '',
+                redirectTo: 'dashboard',
+                pathMatch: 'full',
+                data: {
+                    display: false
+                }
+            },
+            {
+                path: 'dashboard',
+                component: DashboardComponent,
+                canActivate: [AuthGuard],
+                data: {
+                    name: 'Dashboard',
+                    icon: 'area-chart',
+                    display: true
+                }
+            },
+            {
+                path: 'auth/login',
+                component: LoginComponent,
+                data: {
+                    name: 'Đăng nhập',
+                    icon: 'Dashboard',
+                    display: false
+                }
+            },
+        ] as Routes
+    },
+    VEHICLE_GROUP: {
+        name: 'Quản lí xe',
+        path: 'vehicles',
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
+        children: [
+            {
+                path: 'edit-vehicle-category/:id',
+                component: VehicleCategoryFormComponent,
+                data: {
+                    name: 'Sửa nhóm xe',
+                    icon: '',
+                    display: false
+                }
+            },
+            {
+                path: 'vehicle-category-list',
+                component: VehicleCategoryListComponent,
+                data: {
+                    name: 'Danh sách nhóm xe',
+                    icon: 'unordered-list',
+                    display: true
+                }
+            },
+            {
+                path: 'vehicle-category-form',
+                component: VehicleCategoryFormComponent,
+                data: {
+                    name: 'Thêm nhóm xe',
+                    icon: 'plus',
+                    display: true
+                }
+            },
+            {
+                path: 'vehicle-list',
+                component: VehiclesListComponent,
+                data: {
+                    name: 'Danh sách xe',
+                    icon: 'unordered-list',
+                    display: true
+                }
+            },
+            {
+                path: 'vehicle-form',
+                component: VehiclesFormComponent,
+                data: {
+                    name: 'Thêm xe',
+                    icon: 'plus',
+                    display: true
+                }
+            },
+        ] as Routes
+    },
+    VOYAGE_GROUP: {
+        name: 'Quản lí tuyến đường',
+        path: 'voyages',
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
+        children: [
+            {
+                path: 'create',
+                component: VoyageFormComponent,
+                data: {
+                    name: 'Thêm tuyến đường',
+                    icon: 'plus',
+                    display: true
+                }
+            },
+            {
+                path: 'login',
+                component: DashboardComponent,
+                data: {
+                    name: 'Đăng nhập',
+                    icon: 'Dashboard',
+                    display: false
+                }
+            },
+        ] as Routes
+    }
 };
 
 const redirectRoute: Route = {
-  path: '**',
-  redirectTo: 'dashboard',
-  pathMatch: 'full'
+    path: '**',
+    redirectTo: 'dashboard',
+    pathMatch: 'full'
 };
 
 @NgModule({
-  imports: [RouterModule.forRoot([ROUTER_GROUPS.APP_GROUP, redirectRoute])],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot([ROUTER_GROUPS.APP_GROUP, redirectRoute])],
+    exports: [RouterModule]
 })
 export class AppRoutingModule {
 }

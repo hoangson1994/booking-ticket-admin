@@ -53,7 +53,7 @@ export class AuthService {
     if (!this.observable) {
       this.observable = this.http
           .get<{ data: IUser }>(
-              `${API_URL}auth/user-data`,
+              `${API_URL}users/user-data`,
               {
                 headers: {
                   authorization: localStorage.getItem(ACCESS_TOKEN_SECRET_KEY),
