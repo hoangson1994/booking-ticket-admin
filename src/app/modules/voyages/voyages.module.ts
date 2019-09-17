@@ -4,10 +4,11 @@ import {VoyageFormComponent} from './voyage-form/voyage-form.component';
 import {SharedModule} from '../../shared/shared.module';
 import {RouterModule} from '@angular/router';
 import {ROUTER_GROUPS} from '../../app-routing.module';
+import { VoyagesListComponent } from './voyages-list/voyages-list.component';
 
 
 @NgModule({
-    declarations: [VoyageFormComponent],
+    declarations: [VoyageFormComponent, VoyagesListComponent],
     imports: [
         SharedModule,
         RouterModule.forRoot([ROUTER_GROUPS.VOYAGE_GROUP])

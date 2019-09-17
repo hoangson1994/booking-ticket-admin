@@ -8,6 +8,9 @@ import {VehicleCategoryFormComponent} from './modules/vehicle/vehicle-category-f
 import {VehicleCategoryListComponent} from './modules/vehicle/vehicle-category-list/vehicle-category-list.component';
 import {VehiclesListComponent} from './modules/vehicle/vehicles-list/vehicles-list.component';
 import {VehiclesFormComponent} from './modules/vehicle/vehicles-form/vehicles-form.component';
+import {VoyagesListComponent} from './modules/voyages/voyages-list/voyages-list.component';
+import {ScheduleTemplateFormComponent} from './modules/schedule-templates/schedule-template-form/schedule-template-form.component';
+import {ScheduleTemplatesListComponent} from './modules/schedule-templates/schedule-templates-list/schedule-templates-list.component';
 
 /**
  * - Router group để side bar có thể import và tự động điều chỉnh các phần tử.
@@ -116,12 +119,38 @@ export const ROUTER_GROUPS = {
                 }
             },
             {
-                path: 'login',
-                component: DashboardComponent,
+                path: 'list',
+                component: VoyagesListComponent,
                 data: {
-                    name: 'Đăng nhập',
-                    icon: 'Dashboard',
-                    display: false
+                    name: 'Danh sách tuyến đường',
+                    icon: 'unordered-list',
+                    display: true
+                }
+            },
+        ] as Routes
+    },
+    SCHEDULE_TEMPLATE_GROUP: {
+        name: 'Quản lí mẫu lịch',
+        path: 'schedule-template',
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
+        children: [
+            {
+                path: 'create',
+                component: ScheduleTemplateFormComponent,
+                data: {
+                    name: 'Thêm mẫu lịch',
+                    icon: 'plus',
+                    display: true
+                }
+            },
+            {
+                path: 'list',
+                component: ScheduleTemplatesListComponent,
+                data: {
+                    name: 'Danh sách mẫu lịch',
+                    icon: 'unordered-list',
+                    display: true
                 }
             },
         ] as Routes

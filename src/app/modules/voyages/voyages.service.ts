@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {HelperService} from '../../shared/services/helper.service';
 import {API_URL} from '../../resources/static.resource';
+import {IVoyage} from '../../interfaces/voyage.interface';
+import {map} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -37,5 +39,11 @@ export class VoyagesService {
 
     create(value) {
         return this.http.post(`${API_URL}voyages`, value, {headers: this.helper.getAuth()});
+    }
+
+    list() {
+        return this.http.get<{datas: IVoyage[]}>(`${API_URL}voyages`,
+            {headers: this.helper.getAuth()}
+        ).pipe(map(({datas}) => datas));
     }
 }
