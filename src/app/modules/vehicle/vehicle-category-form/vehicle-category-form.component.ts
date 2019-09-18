@@ -23,7 +23,7 @@ export class VehicleCategoryFormComponent implements OnInit {
     private vehicleService: VehicleService,
     private fb: FormBuilder,
     private notify: NzNotificationService,
-    private helps: HelperService,
+    private helper: HelperService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {
@@ -33,7 +33,7 @@ export class VehicleCategoryFormComponent implements OnInit {
         this.id = value.id;
       },
       error: err => {
-        this.helps.handleError(err);
+        this.helper.handleError(err);
       }
     });
     if (this.id !== undefined) {
@@ -53,13 +53,13 @@ export class VehicleCategoryFormComponent implements OnInit {
         next: value => {
           this.form.patchValue(
             {
-              'name': value.name,
-              'seatQuantity': value.seatQuantity,
-              'price': value.price
+              name: value.name,
+              seatQuantity: value.seatQuantity,
+              price: value.price
             });
         },
         error: err => {
-          this.helps.handleError(err);
+          this.helper.handleError(err);
         }
       });
   }
@@ -77,7 +77,7 @@ export class VehicleCategoryFormComponent implements OnInit {
             this.notify.success('Thành công', 'Tạo nhóm xe thành công');
           },
           error: err => {
-            this.helps.handleError(err);
+            this.helper.handleError(err);
           }
         }
       );
@@ -99,7 +99,7 @@ export class VehicleCategoryFormComponent implements OnInit {
           this.notify.success('Thành công', 'Sửa nhóm xe thành công');
           this.router.navigate(['/vehicles/vehicle-category-list']);
         }, error: err => {
-          this.helps.handleError(err);
+          this.helper.handleError(err);
         }
       });
   }

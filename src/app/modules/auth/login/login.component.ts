@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private fb: FormBuilder,
     private notify: NzNotificationService,
-    private helps: HelperService,
+    private helper: HelperService,
     private router: Router
   ) {
     this.form = this.fb.group(authService.formControl);
@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.helper.setDirtyAForm(this.form);
     if (this.form.invalid) {
       return;
     }
@@ -46,7 +47,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/dashboard']);
         },
         error => {
-          this.helps.handleError(error);
+          this.helper.handleError(error);
         }
       );
   }

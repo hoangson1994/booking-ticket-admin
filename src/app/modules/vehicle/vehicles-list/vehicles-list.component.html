@@ -29,9 +29,8 @@
         <td>
           <a nz-button nzSize="small"
              class="mr-1 mb-1"
-             [routerLink]="['/vehicles/vehicle-category/edit']"
-             [queryParams]="{id: data.id}"
-          >
+             [routerLink]="['/vehicles/edit-vehicle/',data.id]">
+<!--             [queryParams]="{id: data.id}"-->
             <i nz-icon type="edit"></i>Sửa</a>
 
           <a nz-popconfirm

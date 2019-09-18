@@ -8,6 +8,8 @@ import {VehicleCategoryFormComponent} from './modules/vehicle/vehicle-category-f
 import {VehicleCategoryListComponent} from './modules/vehicle/vehicle-category-list/vehicle-category-list.component';
 import {VehiclesListComponent} from './modules/vehicle/vehicles-list/vehicles-list.component';
 import {VehiclesFormComponent} from './modules/vehicle/vehicles-form/vehicles-form.component';
+import {UserFormComponent} from './modules/user/user-form/user-form.component';
+import {UserListComponent} from './modules/user/user-list/user-list.component';
 
 /**
  * - Router group để side bar có thể import và tự động điều chỉnh các phần tử.
@@ -84,7 +86,17 @@ export const ROUTER_GROUPS = {
           icon: '',
           display: true
         }
-      }, {
+      },
+      {
+        path: 'edit-vehicle/:id',
+        component: VehiclesFormComponent,
+        data: {
+          name: 'Sửa xe',
+          icon: '',
+          display: false
+        }
+      },
+      {
         path: 'vehicle-form',
         component: VehiclesFormComponent,
         data: {
@@ -117,6 +129,30 @@ export const ROUTER_GROUPS = {
           display: false
         }
       },
+    ] as Routes
+  },
+  USER_GROUP: {
+    name: 'Quản lý người dùng',
+    path: 'user',
+    children: [
+      {
+        path: 'create-user',
+        component: UserFormComponent,
+        data: {
+          name: 'Thêm nhân viên',
+          icon: '',
+          display: true
+        }
+      },
+      {
+        path: 'list-user',
+        component: UserListComponent,
+        data: {
+          name: 'Danh sách nhân viên',
+          icon: '',
+          display: true
+        }
+      }
     ] as Routes
   }
 };
