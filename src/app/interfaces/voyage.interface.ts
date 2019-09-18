@@ -7,4 +7,11 @@ export interface IVoyage {
     updatedAt: number;
     status: number;
     voyageParts: IVoyagePart[];
+
+    isDeleting: boolean;
+}
+
+export enum VoyageStatus {
+    Active = 1,
+    Inactive = 2
 }

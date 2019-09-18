@@ -12,6 +12,7 @@ import {SharedModule} from './shared/shared.module';
 import {LoginComponent} from './modules/auth/login/login.component';
 import {VoyagesModule} from './modules/voyages/voyages.module';
 import {VehicleModule} from './modules/vehicle/vehicle.module';
+import {ScheduleTemplatesModule} from './modules/schedule-templates/schedule-templates.module';
 import {UserModule} from './modules/user/user.module';
 
 registerLocaleData(vi);
@@ -25,9 +26,10 @@ registerLocaleData(vi);
     LoginComponent
   ],
   imports: [
-    UserModule,
     VehicleModule,
     VoyagesModule,
+    ScheduleTemplatesModule,
+    UserModule,
     SharedModule,
     AppRoutingModule
   ],
