@@ -169,13 +169,15 @@ export const ROUTER_GROUPS = {
   USER_GROUP: {
     name: 'Quản lý người dùng',
     path: 'user',
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
     children: [
       {
         path: 'create-user',
         component: UserFormComponent,
         data: {
           name: 'Thêm nhân viên',
-          icon: '',
+          icon: 'plus',
           display: true
         }
       },
@@ -184,8 +186,17 @@ export const ROUTER_GROUPS = {
         component: UserListComponent,
         data: {
           name: 'Danh sách nhân viên',
-          icon: '',
+          icon: 'unordered-list',
           display: true
+        }
+      },
+      {
+        path: 'edit-user/:id',
+        component: UserFormComponent,
+        data: {
+          name: 'Sửa nhân viên',
+          icon: 'unordered-list',
+          display: false
         }
       }
     ] as Routes

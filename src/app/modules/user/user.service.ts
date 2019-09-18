@@ -35,11 +35,9 @@ export class UserService {
     return this.http.post<{ data: IVehicle }>(`${API_URL}users/create`,
       value, {headers: this.helper.getAuth()}
     ).pipe(
-      map(d => {
-        console.log(d);
-        return d.data;
-      })
-    );
+      map(d => d.data)
+    )
+      ;
   }
 
   listUser(): Observable<IUser[]> {
@@ -50,10 +48,23 @@ export class UserService {
   }
 
   singleUser(id): Observable<IUser> {
-    return this.http.get<{ data: IUser }>(`${API_URL}users/user-data/${id}`, {
+    return this.http.get<{ data: IUser }>(`${API_URL}users/user-data?id=${id}`, {
       headers: this.helper.getAuth()
     })
       .pipe(map(({data}) => data));
   }
 
+  deleteUser(id): Observable<IUser> {
+    return this.http.get<{ data: IUser }>(`${API_URL}users/delete?id=${id}`, {
+      headers: this.helper.getAuth()
+    })
+      .pipe(map(({data}) => data));
+  }
+
+  editUser(id, value): Observable<IUser> {
+    return this.http.post<{ data: IUser }>(`${API_URL}users/edit?id=${id}`, value, {
+      headers: this.helper.getAuth()
+    })
+      .pipe(map(({data}) => data));
+  }
 }

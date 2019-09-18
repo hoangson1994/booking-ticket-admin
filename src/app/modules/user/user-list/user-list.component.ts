@@ -11,7 +11,7 @@ import {finalize} from 'rxjs/operators';
   styleUrls: ['./user-list.component.less']
 })
 export class UserListComponent implements OnInit {
-  user: IUser[] = null;
+  datas: IUser[] = null;
   isLoding: boolean;
   userStatus = UserStatus;
 
@@ -34,8 +34,7 @@ export class UserListComponent implements OnInit {
       )
       .subscribe({
         next: value => {
-          this.user = value;
-          console.log(value);
+          this.datas = value;
         },
         error: err => {
           this.helper.handleError(err);
@@ -43,7 +42,18 @@ export class UserListComponent implements OnInit {
       });
   }
 
-  deleteUser(id) {
-    console.log(id);
+  deleteUser(index) {
+    const selected = this.datas[index];
+    selected.isDeleting = true;
+    this.userService.deleteUser(selected.id)
+      .subscribe({
+        next: value => {
+          this.datas.splice(index, 1);
+          this.notify.success('Thành công', 'Xóa nhân viên thành công');
+        },
+        error: err => {
+          this.helper.handleError(err);
+        }
+      });
   }
 }

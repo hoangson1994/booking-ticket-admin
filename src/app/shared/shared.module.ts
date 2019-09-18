@@ -11,6 +11,7 @@ import {RegionSelectorComponent} from './selector/region-selector/region-selecto
 import {VehicleCategorySelectorComponent} from './selector/vehicle-category-selector/vehicle-category-selector.component';
 import {VoyageSelectorComponent} from './selector/voyage-selector/voyage-selector.component';
 import { CustomTimepickerComponent } from './components/custom-timepicker/custom-timepicker.component';
+import { CustomDatepickerComponent } from './components/custom-datepicker/custom-datepicker.component';
 
 @NgModule({
     imports: [
@@ -28,7 +29,8 @@ import { CustomTimepickerComponent } from './components/custom-timepicker/custom
         RegionSelectorComponent,
         VehicleCategorySelectorComponent,
         VoyageSelectorComponent,
-        CustomTimepickerComponent
+        CustomTimepickerComponent,
+        CustomDatepickerComponent
     ],
     exports: [
         CommonModule,
@@ -43,7 +45,8 @@ import { CustomTimepickerComponent } from './components/custom-timepicker/custom
         RegionSelectorComponent,
         VehicleCategorySelectorComponent,
         VoyageSelectorComponent,
-        CustomTimepickerComponent
+        CustomTimepickerComponent,
+        CustomDatepickerComponent
     ]
 })
 export class SharedModule {

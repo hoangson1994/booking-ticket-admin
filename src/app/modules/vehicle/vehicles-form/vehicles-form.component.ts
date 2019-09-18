@@ -67,7 +67,6 @@ export class VehiclesFormComponent implements OnInit {
     this.vehicleService.singleVehicle(id)
       .subscribe({
         next: value => {
-          console.log(value);
           this.helper.setValueToForm(this.form, value);
         },
         error: err => {

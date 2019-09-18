@@ -5,7 +5,7 @@ export interface IUser {
   name: string;
   phoneNumber: string;
   address: string;
-  birthday: string;
+  birthday: number;
   created_at: string;
   updated_at: string;
   status: number;
