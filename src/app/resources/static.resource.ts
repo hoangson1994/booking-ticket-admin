@@ -28,5 +28,7 @@ export enum ERouters {
   notifications = 'notifications',
   action_logs = 'action-logs',
   member_groups = 'member-groups',
-  bank_accounts = 'bank-accounts'
+  bank_accounts = 'bank-accounts',
+  schedule_templates = 'schedule-templates',
+  voyages = 'voyages'
 }

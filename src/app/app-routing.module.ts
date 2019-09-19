@@ -131,7 +131,7 @@ export const ROUTER_GROUPS = {
     },
     SCHEDULE_TEMPLATE_GROUP: {
         name: 'Quản lí mẫu lịch',
-        path: 'schedule-template',
+        path: 'schedule-templates',
         canActivate: [AuthGuard],
         canActivateChild: [AuthGuard],
         children: [
@@ -151,6 +151,15 @@ export const ROUTER_GROUPS = {
                     name: 'Danh sách mẫu lịch',
                     icon: 'unordered-list',
                     display: true
+                }
+            },
+            {
+                path: 'edit',
+                component: ScheduleTemplateFormComponent,
+                data: {
+                    name: 'Chỉnh sửa mẫu lịch',
+                    icon: 'unordered-list',
+                    display: false
                 }
             },
         ] as Routes

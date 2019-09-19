@@ -4,6 +4,7 @@ import {VoyagesService} from '../voyages.service';
 import {NzNotificationService} from 'ng-zorro-antd';
 import {HelperService} from '../../../shared/services/helper.service';
 import {Router} from '@angular/router';
+import {ERouters} from '../../../resources/static.resource';
 
 @Component({
     selector: 'app-voyage-form',
@@ -57,14 +58,13 @@ export class VoyageFormComponent implements OnInit {
                 return;
             }
         }
-
-        console.log(this.voyageForm.value);
-
+        
         this.service
             .create(this.voyageForm.value)
             .subscribe({
                 next: value => {
                     this.notify.success('Thành công', 'Thêm tuyến đường thành công');
+                    this.router.navigate(['/', ERouters.voyages, ERouters.list]);
                 },
                 error: err => {
                     this.helper.handleError(err);
