@@ -3,11 +3,17 @@ export interface IUser {
   email: string;
   password: string;
   name: string;
-  phone_number: string;
+  phoneNumber: string;
   address: string;
-  birthday: string;
+  birthday: number;
   created_at: string;
   updated_at: string;
   status: number;
   accessToken: string;
+  isDeleting: boolean;
+}
+
+export enum UserStatus {
+  active = 1,
+  inactive = -1
 }

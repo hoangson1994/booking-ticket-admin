@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -13,25 +13,28 @@ import {LoginComponent} from './modules/auth/login/login.component';
 import {VoyagesModule} from './modules/voyages/voyages.module';
 import {VehicleModule} from './modules/vehicle/vehicle.module';
 import {ScheduleTemplatesModule} from './modules/schedule-templates/schedule-templates.module';
+import {UserModule} from './modules/user/user.module';
 
 registerLocaleData(vi);
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HeaderComponent,
-        SidebarComponent,
-        DashboardComponent,
-        LoginComponent
-    ],
-    imports: [
-        VehicleModule,
-        VoyagesModule,
-        ScheduleTemplatesModule,
-        SharedModule,
-        AppRoutingModule
-    ],
-    providers: [{provide: NZ_I18N, useValue: vi_VN}],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    SidebarComponent,
+    DashboardComponent,
+    LoginComponent
+  ],
+  imports: [
+    VehicleModule,
+    VoyagesModule,
+    ScheduleTemplatesModule,
+    UserModule,
+    SharedModule,
+    AppRoutingModule
+  ],
+  providers: [{provide: NZ_I18N, useValue: vi_VN}],
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

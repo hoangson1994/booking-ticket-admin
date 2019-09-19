@@ -58,7 +58,7 @@ export class VoyageFormComponent implements OnInit {
                 return;
             }
         }
-        
+
         this.service
             .create(this.voyageForm.value)
             .subscribe({

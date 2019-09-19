@@ -21,9 +21,6 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private fb: FormBuilder,
-    private notify: NzNotificationService,
-    private router: Router,
   ) {
   }
 

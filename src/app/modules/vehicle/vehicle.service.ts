@@ -78,9 +78,26 @@ export class VehicleService {
     ).pipe(map(({data}) => data));
   }
 
+  singleVehicle(id) {
+    return this.http.get<{ data: IVehicle }>(`${API_URL}vehicles/${id}`, {
+        headers: this.helper.getAuth(),
+      }
+    ).pipe(map(({data}) => data));
+  }
+
   editVehicleCategory(value, id) {
     return this.http.put<{ data: IVehicleCategory }>(
       `${API_URL}vehicle-categories/${id}`,
+      value,
+      {
+        headers: this.helper.getAuth(),
+      }
+    ).pipe(map(({data}) => data));
+  }
+
+  editVehicle(value, id) {
+    return this.http.put<{ data: IVehicleCategory }>(
+      `${API_URL}vehicles/${id}`,
       value,
       {
         headers: this.helper.getAuth(),
