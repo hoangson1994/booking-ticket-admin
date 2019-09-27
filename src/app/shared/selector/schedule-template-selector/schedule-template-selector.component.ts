@@ -3,6 +3,7 @@ import {HelperService} from '../../services/helper.service';
 import {ScheduleTemplatesService} from '../../../modules/schedule-templates/schedule-templates.service';
 import {IScheduleTemplate} from '../../../interfaces/schedule-template.interface';
 import {NG_VALUE_ACCESSOR} from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-schedule-template-selector',
@@ -19,9 +20,10 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
 export class ScheduleTemplateSelectorComponent implements OnInit {
   @Input()
   mode: string;
-
-  data: IScheduleTemplate[];
+  today = moment().startOf('d');
+  datas: IScheduleTemplate[];
   private propagateChange: (_: any) => void;
+
   //tslint:disable
   private _model;
   get model() {
@@ -37,6 +39,11 @@ export class ScheduleTemplateSelectorComponent implements OnInit {
     }
   }
 
+  parseOffsetMlsToTime(offTime: number): string {
+    const time = this.today.valueOf() + offTime;
+    return moment(time).format('HH:mm');
+  }
+
   constructor(
     private scheduleT: ScheduleTemplatesService,
     private helper: HelperService
@@ -49,7 +56,7 @@ export class ScheduleTemplateSelectorComponent implements OnInit {
 
   list() {
     this.scheduleT.list().subscribe({
-      next: value => this.data = value,
+      next: value => this.datas = value,
       error: err => this.helper.handleError(err)
     });
   }

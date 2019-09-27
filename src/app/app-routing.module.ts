@@ -228,6 +228,15 @@ export const ROUTER_GROUPS = {
           }
         },
         {
+          path: 'edit-schedule',
+          component: SchedulesFormComponent,
+          data: {
+            icon: 'plus',
+            display: false,
+            name: 'Tạo lịch'
+          }
+        },
+        {
           path: 'list-schedule',
           component: ScheduleListComponent,
           data: {

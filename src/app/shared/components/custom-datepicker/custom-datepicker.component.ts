@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {AbstractControl} from '@angular/forms';
 import * as moment from 'moment';
 import {HelperService} from '../../services/helper.service';
@@ -8,7 +8,7 @@ import {HelperService} from '../../services/helper.service';
   templateUrl: './custom-datepicker.component.html',
   styleUrls: ['./custom-datepicker.component.less']
 })
-export class CustomDatepickerComponent implements OnInit {
+export class CustomDatepickerComponent implements OnInit, OnChanges {
   @Input()
   dateControl: AbstractControl;
   @Input()
@@ -30,5 +30,11 @@ export class CustomDatepickerComponent implements OnInit {
       value = moment(ev).valueOf();
     }
     this.helper.updateAFormField(this.dateControl, value);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.dateInput) {
+      this.date = moment(this.dateInput).toDate();
+    }
   }
 }

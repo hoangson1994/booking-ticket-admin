@@ -9,6 +9,8 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {NzNotificationService} from 'ng-zorro-antd';
 import {finalize} from 'rxjs/operators';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import * as moment from 'moment';
+import {ISchedule} from '../../../interfaces/schedule.interface';
 
 @Component({
   selector: 'app-schedules-form',
@@ -21,6 +23,7 @@ export class SchedulesFormComponent implements OnInit {
   isPost: boolean;
   isSubmit = true;
   id: Params;
+  selectedSchedule: ISchedule;
 
   constructor(
     private vehicleService: VehicleService,
@@ -35,22 +38,15 @@ export class SchedulesFormComponent implements OnInit {
     private router: Router
   ) {
     this.form = this.fb.group(scheduleService.formControl);
-
-    this.activatedRoute.params.subscribe({
-      next: value => {
-        this.id = value.id;
-        if (this.id !== undefined) {
-          this.isSubmit = false;
-          this.selectSchedule(this.id);
-        }
-      },
-      error: err => {
-        this.helper.handleError(err);
-      }
-    });
   }
 
   ngOnInit() {
+    this.selectedSchedule = {} as ISchedule;
+    this.id = this.activatedRoute.snapshot.queryParams.id;
+    if (this.id !== undefined) {
+      this.isSubmit = false;
+      this.selectSchedule(this.id);
+    }
   }
 
   onSubmit() {
@@ -77,7 +73,9 @@ export class SchedulesFormComponent implements OnInit {
       .pipe(finalize(() => this.isPost = false))
       .subscribe({
         next: value => {
+          this.selectedSchedule = value;
           this.helper.setValueToForm(this.form, value);
+          console.log(value);
         },
         error: err => {
           this.helper.handleError(err);
