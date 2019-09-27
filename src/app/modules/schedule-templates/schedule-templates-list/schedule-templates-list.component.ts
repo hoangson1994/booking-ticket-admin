@@ -5,6 +5,7 @@ import {ERouters} from '../../../resources/static.resource';
 import {ScheduleTemplatesService} from '../schedule-templates.service';
 import {HelperService} from '../../../shared/services/helper.service';
 import {finalize} from 'rxjs/operators';
+import {NzNotificationService} from 'ng-zorro-antd';
 
 @Component({
     selector: 'app-schedule-templates-list',
@@ -20,7 +21,8 @@ export class ScheduleTemplatesListComponent implements OnInit {
 
     constructor(
         private service: ScheduleTemplatesService,
-        private helper: HelperService
+        private helper: HelperService,
+        private notify: NzNotificationService
     ) {
     }
 
@@ -48,5 +50,18 @@ export class ScheduleTemplatesListComponent implements OnInit {
     }
 
     doDelete(i: number) {
+        const selected = this.datas[i];
+        selected.isDeleting = true;
+        this.service.delete(selected.id)
+            .pipe(finalize(() => selected.isDeleting = false))
+            .subscribe({
+                next: value => {
+                    this.datas.splice(i, 1);
+                    this.notify.success('Thành công', 'Xóa mẫu lịch thành công');
+                },
+                error: err => {
+                    this.helper.handleError(err);
+                }
+            });
     }
 }

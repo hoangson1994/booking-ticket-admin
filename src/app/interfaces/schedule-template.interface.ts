@@ -6,6 +6,7 @@ export interface IScheduleTemplate {
     timeEnd: number;
     voyages: IVoyage[];
     status: number;
+    listVoyageIds: any[];
 
     isDeleting: boolean;
 }
