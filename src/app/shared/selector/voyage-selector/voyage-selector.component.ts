@@ -20,7 +20,7 @@ export class VoyageSelectorComponent implements OnInit {
     @Input()
     mode: string;
 
-    datas: IVoyage[];
+    data: IVoyage[];
     private propagateChange: (_: any) => void;
     //tslint:disable
     private _model;
@@ -52,7 +52,7 @@ export class VoyageSelectorComponent implements OnInit {
             .list()
             .subscribe({
                 next: value => {
-                    this.datas = value;
+                    this.data = value;
                 },
                 error: err => this.helper.handleError(err)
             });

@@ -14,6 +14,7 @@ import {VoyagesModule} from './modules/voyages/voyages.module';
 import {VehicleModule} from './modules/vehicle/vehicle.module';
 import {ScheduleTemplatesModule} from './modules/schedule-templates/schedule-templates.module';
 import {UserModule} from './modules/user/user.module';
+import {ScheduleModule} from './modules/schedules/schedule.module';
 
 registerLocaleData(vi);
 
@@ -26,6 +27,7 @@ registerLocaleData(vi);
     LoginComponent
   ],
   imports: [
+    ScheduleModule,
     VehicleModule,
     VoyagesModule,
     ScheduleTemplatesModule,

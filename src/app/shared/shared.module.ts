@@ -12,6 +12,9 @@ import {VehicleCategorySelectorComponent} from './selector/vehicle-category-sele
 import {VoyageSelectorComponent} from './selector/voyage-selector/voyage-selector.component';
 import { CustomTimepickerComponent } from './components/custom-timepicker/custom-timepicker.component';
 import { CustomDatepickerComponent } from './components/custom-datepicker/custom-datepicker.component';
+import { UserSelectorComponent } from './selector/user-selector/user-selector.component';
+import { VehicleSelectorComponent } from './selector/vehicle-selector/vehicle-selector.component';
+import { ScheduleTemplateSelectorComponent } from './selector/schedule-template-selector/schedule-template-selector.component';
 
 @NgModule({
     imports: [
@@ -30,24 +33,30 @@ import { CustomDatepickerComponent } from './components/custom-datepicker/custom
         VehicleCategorySelectorComponent,
         VoyageSelectorComponent,
         CustomTimepickerComponent,
-        CustomDatepickerComponent
+        CustomDatepickerComponent,
+        UserSelectorComponent,
+        VehicleSelectorComponent,
+        ScheduleTemplateSelectorComponent
     ],
-    exports: [
-        CommonModule,
-        HttpClientModule,
-        FormsModule,
-        ReactiveFormsModule,
-        NgZorroAntdModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        TranslatePipe,
-        CustomImageUploadComponent,
-        RegionSelectorComponent,
-        VehicleCategorySelectorComponent,
-        VoyageSelectorComponent,
-        CustomTimepickerComponent,
-        CustomDatepickerComponent
-    ]
+  exports: [
+    CommonModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgZorroAntdModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    TranslatePipe,
+    CustomImageUploadComponent,
+    RegionSelectorComponent,
+    VehicleCategorySelectorComponent,
+    VoyageSelectorComponent,
+    CustomTimepickerComponent,
+    CustomDatepickerComponent,
+    UserSelectorComponent,
+    VehicleSelectorComponent,
+    ScheduleTemplateSelectorComponent
+  ]
 })
 export class SharedModule {
 }

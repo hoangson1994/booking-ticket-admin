@@ -1,11 +1,10 @@
 <nz-select class="w-100"
            [(ngModel)]="model"
            nzPlaceHolder="Tìm kiếm và chọn tuyến đường"
-           [nzMode]="mode"
            nzShowSearch
            nzAllowClear
 >
-    <ng-container *ngFor="let data of datas">
+    <ng-container *ngFor="let data of data">
         <nz-option [nzValue]="data.id"
                    [nzLabel]="data.name"
         ></nz-option>

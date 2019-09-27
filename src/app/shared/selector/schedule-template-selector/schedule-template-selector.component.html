@@ -1,0 +1,13 @@
+<nz-select class="w-100"
+           [(ngModel)]="model"
+           nzPlaceHolder="Chọn tài xế"
+           nzShowSearch
+           nzAllowClear
+>
+  <ng-container *ngFor="let datas of data">
+    <nz-option [nzValue]="datas.id"
+               [nzLabel]="datas.id"
+    ></nz-option>
+  </ng-container>
+
+</nz-select>
