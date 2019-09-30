@@ -15,6 +15,7 @@ import {UserFormComponent} from './modules/user/user-form/user-form.component';
 import {UserListComponent} from './modules/user/user-list/user-list.component';
 import {SchedulesFormComponent} from './modules/schedules/schedules-form/schedules-form.component';
 import {ScheduleListComponent} from './modules/schedules/schedule-list/schedule-list.component';
+import {OrderListComponent} from './modules/order/order-list/order-list.component';
 
 /**
  * - Router group để side bar có thể import và tự động điều chỉnh các phần tử.
@@ -53,6 +54,24 @@ export const ROUTER_GROUPS = {
         }
       },
     ] as Routes
+  },
+  ORDER_GROUP: {
+    name: 'Đặt chuyến cho khách',
+    path: 'order',
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    children: [
+      {
+        path: 'list-order',
+        component: OrderListComponent,
+        data: {
+          name: 'Danh sách đặt chuyến',
+          icon: 'unordered-list',
+          display: true
+        }
+
+      }
+    ]
   },
   VEHICLE_GROUP: {
     name: 'Quản lí xe',
@@ -166,15 +185,15 @@ export const ROUTER_GROUPS = {
           display: true
         }
       },
-        {
-            path: 'edit',
-            component: ScheduleTemplateFormComponent,
-            data: {
-                name: 'Chỉnh sửa mẫu lịch',
-                icon: 'unordered-list',
-                display: false
-            }
-        },
+      {
+        path: 'edit',
+        component: ScheduleTemplateFormComponent,
+        data: {
+          name: 'Chỉnh sửa mẫu lịch',
+          icon: 'unordered-list',
+          display: false
+        }
+      },
     ] as Routes
   },
   USER_GROUP: {
@@ -210,44 +229,44 @@ export const ROUTER_GROUPS = {
           display: false
         }
       }
-      ] as Routes
-    },
-    SCHEDULE_GROUP: {
-      name: 'Quản lý lich',
-      path: 'schedules',
-      canActivate: [AuthGuard],
-      canActivateChild: [AuthGuard],
-      children: [
-        {
-          path: 'create-schedule',
-          component: SchedulesFormComponent,
-          data: {
-            icon: 'plus',
-            display: true,
-            name: 'Tạo lịch'
-          }
-        },
-        {
-          path: 'edit-schedule',
-          component: SchedulesFormComponent,
-          data: {
-            icon: 'plus',
-            display: false,
-            name: 'Tạo lịch'
-          }
-        },
-        {
-          path: 'list-schedule',
-          component: ScheduleListComponent,
-          data: {
-            icon: 'unordered-list',
-            name: 'Danh sách lịch',
-            display: true
-          }
+    ] as Routes
+  },
+  SCHEDULE_GROUP: {
+    name: 'Quản lý lich',
+    path: 'schedules',
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    children: [
+      {
+        path: 'create-schedule',
+        component: SchedulesFormComponent,
+        data: {
+          icon: 'plus',
+          display: true,
+          name: 'Tạo lịch'
         }
-      ] as Routes
-    }
-  };
+      },
+      {
+        path: 'edit-schedule',
+        component: SchedulesFormComponent,
+        data: {
+          icon: 'plus',
+          display: false,
+          name: 'Tạo lịch'
+        }
+      },
+      {
+        path: 'list-schedule',
+        component: ScheduleListComponent,
+        data: {
+          icon: 'unordered-list',
+          name: 'Danh sách lịch',
+          display: true
+        }
+      }
+    ] as Routes
+  }
+};
 
 const redirectRoute: Route = {
   path: '**',

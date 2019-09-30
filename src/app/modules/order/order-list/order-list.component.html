@@ -1,0 +1,17 @@
+<!--<nz-spin>-->
+<div nz-row [nzGutter]="8">
+
+  <div nz-col [nzMd]="8" *ngFor="let data of datas">
+    <nz-card
+      [nzBordered]="false"
+      [nzTitle]="'Chuyến ' + parseOffsetMlsToTime(data.timeStart) + ' : ' + parseOffsetMlsToTime(data.timeEnd) "
+      [nzLoading]="loading"
+    >
+      <div>
+        <p class="list-card"><strong>Card content</strong></p>
+        <p class="list-card"><strong>Card content</strong></p>
+      </div>
+    </nz-card>
+  </div>
+</div>
+<!--</nz-spin>-->
