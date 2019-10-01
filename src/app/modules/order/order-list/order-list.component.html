@@ -7,9 +7,10 @@
       [nzTitle]="'Chuyến ' + parseOffsetMlsToTime(data.timeStart) + ' : ' + parseOffsetMlsToTime(data.timeEnd) "
       [nzLoading]="loading"
     >
-      <div>
-        <p class="list-card"><strong>Card content</strong></p>
-        <p class="list-card"><strong>Card content</strong></p>
+      <div *ngIf="data.voyages">
+        <ng-container *ngFor="let voyage of data.voyages">
+          <p class="list-card"><strong>{{voyage.name}}</strong></p>
+        </ng-container>
       </div>
     </nz-card>
   </div>
