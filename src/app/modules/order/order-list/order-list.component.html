@@ -1,18 +1,19 @@
 <!--<nz-spin>-->
 <div nz-row [nzGutter]="8">
-
-  <div nz-col [nzMd]="8" *ngFor="let data of datas">
-    <nz-card
-      [nzBordered]="false"
-      [nzTitle]="'Chuyến ' + parseOffsetMlsToTime(data.timeStart) + ' : ' + parseOffsetMlsToTime(data.timeEnd) "
-      [nzLoading]="loading"
-    >
-      <div *ngIf="data.voyages">
-        <ng-container *ngFor="let voyage of data.voyages">
-          <p class="list-card"><strong>{{voyage.name}}</strong></p>
-        </ng-container>
-      </div>
-    </nz-card>
-  </div>
+  <ng-container *ngFor="let data of datas">
+    <div nz-col [nzMd]="8">
+      <nz-card
+        [nzBordered]="false"
+        [nzTitle]="'Chuyến ' + parseOffsetMlsToTime(data.timeStart) + ' : ' + parseOffsetMlsToTime(data.timeEnd) "
+        [nzLoading]="loading"
+      >
+        <div *ngIf="data.voyages">
+          <ng-container *ngFor="let voyage of data.voyages">
+            <p class="list-card"><strong>{{voyage.name}}</strong></p>
+          </ng-container>
+        </div>
+      </nz-card>
+    </div>
+  </ng-container>
 </div>
 <!--</nz-spin>-->
