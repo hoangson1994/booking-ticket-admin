@@ -14,6 +14,7 @@ export class OrderListComponent implements OnInit {
 
   datas: IScheduleTemplate[];
   loading = true;
+  today = moment().startOf('d');
 
   constructor(
     private scheduleTemService: ScheduleTemplatesService,
@@ -26,8 +27,8 @@ export class OrderListComponent implements OnInit {
   }
 
   parseOffsetMlsToTime(offTime: number): string {
-
-    return moment(offTime).format('HH:mm');
+    const time = this.today.valueOf() + offTime;
+    return moment(time).format('HH:mm');
   }
 
   list() {
@@ -37,7 +38,6 @@ export class OrderListComponent implements OnInit {
         {
           next: value => {
             this.datas = value;
-            console.log(this.datas);
           },
           error: err => {
             this.helper.handleError(err);
