@@ -15,6 +15,7 @@ import { CustomDatepickerComponent } from './components/custom-datepicker/custom
 import { UserSelectorComponent } from './selector/user-selector/user-selector.component';
 import { VehicleSelectorComponent } from './selector/vehicle-selector/vehicle-selector.component';
 import { ScheduleTemplateSelectorComponent } from './selector/schedule-template-selector/schedule-template-selector.component';
+import { TabContentOrderComponent } from './tabs/tab-content-order/tab-content-order.component';
 
 @NgModule({
     imports: [
@@ -36,7 +37,8 @@ import { ScheduleTemplateSelectorComponent } from './selector/schedule-template-
         CustomDatepickerComponent,
         UserSelectorComponent,
         VehicleSelectorComponent,
-        ScheduleTemplateSelectorComponent
+        ScheduleTemplateSelectorComponent,
+        TabContentOrderComponent
     ],
   exports: [
     CommonModule,
@@ -55,7 +57,8 @@ import { ScheduleTemplateSelectorComponent } from './selector/schedule-template-
     CustomDatepickerComponent,
     UserSelectorComponent,
     VehicleSelectorComponent,
-    ScheduleTemplateSelectorComponent
+    ScheduleTemplateSelectorComponent,
+    TabContentOrderComponent
   ]
 })
 export class SharedModule {

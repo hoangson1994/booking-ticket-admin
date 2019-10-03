@@ -16,6 +16,7 @@ import {UserListComponent} from './modules/user/user-list/user-list.component';
 import {SchedulesFormComponent} from './modules/schedules/schedules-form/schedules-form.component';
 import {ScheduleListComponent} from './modules/schedules/schedule-list/schedule-list.component';
 import {OrderListComponent} from './modules/order/order-list/order-list.component';
+import {OrderCreateComponent} from './modules/order/order-create/order-create.component';
 
 /**
  * - Router group để side bar có thể import và tự động điều chỉnh các phần tử.
@@ -69,8 +70,17 @@ export const ROUTER_GROUPS = {
           icon: 'unordered-list',
           display: true
         }
-
+      },
+      {
+        path: 'create-order',
+        component: OrderCreateComponent,
+        data: {
+          name: 'Đặt tuyến',
+          icon: 'plus',
+          display: true
+        }
       }
+
     ]
   },
   VEHICLE_GROUP: {
