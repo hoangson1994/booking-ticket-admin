@@ -3,14 +3,16 @@ import {OrderListComponent} from './order-list/order-list.component';
 import {SharedModule} from '../../shared/shared.module';
 import {RouterModule} from '@angular/router';
 import {ROUTER_GROUPS} from '../../app-routing.module';
-import { OrderCreateComponent } from './order-create/order-create.component';
+import {OrderCreateComponent} from './order-create/order-create.component';
+import {OrderFormComponent} from './order-form/order-form.component';
 
 @NgModule({
-  declarations: [OrderListComponent, OrderCreateComponent],
+  declarations: [OrderListComponent, OrderCreateComponent, OrderFormComponent],
   imports: [
     SharedModule,
     RouterModule.forRoot([ROUTER_GROUPS.ORDER_GROUP])
-  ]
+  ],
+  entryComponents: [OrderFormComponent]
 })
 export class OrderModule {
 }

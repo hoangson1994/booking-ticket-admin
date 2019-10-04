@@ -1,0 +1,58 @@
+<div nz-row [nzGutter]="8" nzType="flex">
+
+  <div nz-col [nzMd]="12">
+    <nz-tabset nzSize="large">
+      <nz-tab *ngFor="let tab of tabs" [nzTitle]="tab.name.toString()">
+        <nz-spin [nzSpinning]="isLoding">
+          <section>
+            <nz-table
+              [nzData]="datasSchedule"
+              [nzShowPagination]="false"
+              nzFrontPagination="false"
+              [nzBordered]="true"
+            >
+              <thead>
+              <tr>
+                <th>Tài xế</th>
+                <th>Biển số xe</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let data of datasSchedule; let i = index">
+                <td>{{data.driver.name}}</td>
+                <td>{{data.voyage.name}}</td>
+              </tr>
+              </tbody>
+            </nz-table>
+          </section>
+        </nz-spin>
+      </nz-tab>
+    </nz-tabset>
+
+  </div>
+
+  <!--    <div nz-col [nzMd]="14">-->
+  <!--      <section nz-row nzType="flex" nzJustify="center">-->
+  <!--        <div nz-col [nzXXl]="14" [nzXl]="14" [nzLg]="16" [nzMd]="20" [nzSm]="22" [nzXs]="24">-->
+  <!--          <form nz-form>-->
+  <!--            <div nz-row [nzGutter]="8">-->
+
+  <!--              <div nz-col [nzMd]="24">-->
+  <!--                <nz-form-item>-->
+  <!--                  <nz-form-label><strong>SDT khách hàng</strong></nz-form-label>-->
+  <!--                  <nz-form-control [nzErrorTip]="phoneNumberValidate">-->
+  <!--                    <input type="text" nz-input class="w-100" placeholder="Nhập số điện thoại/tên khách hàng"/>-->
+  <!--                  </nz-form-control>-->
+  <!--                  <ng-template #phoneNumberValidate>-->
+  <!--                    Hãy nhập số điện thoại/tên khách hàng-->
+  <!--                  </ng-template>-->
+  <!--                </nz-form-item>-->
+  <!--              </div>-->
+  <!--            </div>-->
+  <!--          </form>-->
+  <!--        </div>-->
+
+  <!--      </section>-->
+  <!--    </div>-->
+
+</div>

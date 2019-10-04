@@ -4,6 +4,7 @@ import {HelperService} from '../../shared/services/helper.service';
 import {Validators} from '@angular/forms';
 import {API_URL} from '../../resources/static.resource';
 import {map} from 'rxjs/operators';
+import {ISchedule} from '../../interfaces/schedule.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,13 @@ export class OrderService {
   listOrder() {
     return this.http.get(`${API_URL}orders`, {headers: this.helper.getAuth()})
       .pipe(map(value => value));
+  }
+
+  listScheduleSearch(params) {
+    return this.http.get<{ datas: ISchedule[] }>(`${API_URL}schedules/search`, {
+      headers: this.helper.getAuth(),
+      params
+    })
+      .pipe(map(({datas}) => datas));
   }
 }
