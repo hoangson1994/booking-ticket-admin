@@ -6,6 +6,8 @@ import {HelperService} from '../../../shared/services/helper.service';
 import {finalize} from 'rxjs/operators';
 import {OrderFormComponent} from '../order-form/order-form.component';
 import {NzModalService} from 'ng-zorro-antd';
+import {IOrderDetail} from '../../../interfaces/order-detail.interface';
+import {IOrder} from '../../../interfaces/order.interface';
 
 @Component({
   selector: 'app-order-create',
@@ -18,7 +20,6 @@ export class OrderCreateComponent implements OnInit {
   loading = true;
   today = moment().startOf('d');
 
-
   constructor(
     private scheduleTemService: ScheduleTemplatesService,
     private helper: HelperService,
@@ -28,7 +29,6 @@ export class OrderCreateComponent implements OnInit {
 
   ngOnInit() {
     this.listSchedule();
-
   }
 
   getOffsetTimeMls(offTime: number): number {
@@ -57,7 +57,7 @@ export class OrderCreateComponent implements OnInit {
 
   showModal(date, voyageId, scheduleTemplateId) {
     const modal = this.modalService.create({
-      nzWidth: 1100,
+      nzWidth: 1200,
       nzContent: OrderFormComponent,
       nzFooter: [
         {

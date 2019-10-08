@@ -28,31 +28,93 @@
         </nz-spin>
       </nz-tab>
     </nz-tabset>
-
   </div>
 
-  <!--    <div nz-col [nzMd]="14">-->
-  <!--      <section nz-row nzType="flex" nzJustify="center">-->
-  <!--        <div nz-col [nzXXl]="14" [nzXl]="14" [nzLg]="16" [nzMd]="20" [nzSm]="22" [nzXs]="24">-->
-  <!--          <form nz-form>-->
-  <!--            <div nz-row [nzGutter]="8">-->
+  <div nz-col [nzMd]="12">
+    <section nz-row nzType="flex">
+      <form nz-form class="w-100" [formGroup]="orderForm">
 
-  <!--              <div nz-col [nzMd]="24">-->
-  <!--                <nz-form-item>-->
-  <!--                  <nz-form-label><strong>SDT khách hàng</strong></nz-form-label>-->
-  <!--                  <nz-form-control [nzErrorTip]="phoneNumberValidate">-->
-  <!--                    <input type="text" nz-input class="w-100" placeholder="Nhập số điện thoại/tên khách hàng"/>-->
-  <!--                  </nz-form-control>-->
-  <!--                  <ng-template #phoneNumberValidate>-->
-  <!--                    Hãy nhập số điện thoại/tên khách hàng-->
-  <!--                  </ng-template>-->
-  <!--                </nz-form-item>-->
-  <!--              </div>-->
-  <!--            </div>-->
-  <!--          </form>-->
-  <!--        </div>-->
+        <div nz-row [nzGutter]="4">
 
-  <!--      </section>-->
-  <!--    </div>-->
+          <div nz-col [nzMd]="12">
+            <ng-container *ngIf="orderForm.get('customerName') as customerName">
+              <nz-form-item>
+                <nz-form-label><strong>Tên khách hàng</strong></nz-form-label>
+                <nz-form-control [nzErrorTip]="customerNameValidate">
+                  <input type="text" [formControl]="customerName" nz-input class="w-100"
+                         placeholder="Nhập tên khách hàng"/>
+                </nz-form-control>
+                <ng-template #customerNameValidate>
+                  Hãy nhập tên khách hàng
+                </ng-template>
+              </nz-form-item>
+            </ng-container>
+          </div>
+
+          <div nz-col [nzMd]="12">
+            <ng-container *ngIf="orderForm.get('phoneNumber') as phoneNumber">
+              <nz-form-item>
+                <nz-form-label><strong>SDT khách hàng</strong></nz-form-label>
+                <nz-form-control [nzErrorTip]="phoneNumberValidate">
+                  <input type="text" nz-input class="w-100" [formControl]="phoneNumber"
+                         placeholder="Nhập số điện thoại khách hàng"/>
+                </nz-form-control>
+                <ng-template #phoneNumberValidate>
+                  Hãy nhập số điện thoại/tên khách hàng
+                </ng-template>
+              </nz-form-item>
+            </ng-container>
+          </div>
+
+          <div nz-col [nzMd]="12">
+            <ng-container *ngIf="orderForm.get('scheduleId') as scheduleId">
+              <nz-form-item>
+                <nz-form-label><strong>Lịch</strong></nz-form-label>
+                <app-schedule-selector [formControl]="scheduleId"></app-schedule-selector>
+              </nz-form-item>
+            </ng-container>
+          </div>
+
+          <div nz-col [nzMd]="24">
+            <nz-form-item>
+              <nz-form-control style="text-align: center; margin-left: 0">
+                <button nz-button nzType="primary" (click)="onSubmit()">Submit</button>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+
+        <div nz-row [nzGutter]="12">
+          <div nz-col>
+            <nz-form-item *ngFor="let control of listOfControl; let i = index">
+              <nz-form-control
+                [nzXs]="24"
+                [nzSm]="20"
+                [nzOffset]="i == 0 ? 0 : 4"
+                nzErrorTip="Please input passenger's name or delete this field."
+              >
+                <input
+                  class="passenger-input"
+                  nz-input
+                  placeholder="placeholder"
+                  [attr.id]="control.id"
+                  [formControlName]="control.controlInstance"
+                />
+                <i nz-icon nzType="minus-circle-o" class="dynamic-delete-button" (click)="removeField(control, $event)"></i>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 20, offset: 4 }">
+                <button nz-button nzType="dashed" class="add-button" (click)="addField($event)">
+                  <i nz-icon nzType="plus"></i>
+                  Add field
+                </button>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+      </form>
+    </section>
+  </div>
 
 </div>

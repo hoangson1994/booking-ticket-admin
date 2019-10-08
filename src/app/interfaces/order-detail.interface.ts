@@ -1,8 +1,12 @@
+import {IVehicleCategory} from './vehicle-category.interface';
+import {ICustomer} from './customer.interface';
+import {IOrder} from './order.interface';
+
 export interface IOrderDetail {
   id: number;
-  orderId: number;
-  vehicleCategoryId: number;
-  customerTypeId: number;
+  orderId: IOrder;
+  vehicleCategoryId: IVehicleCategory;
+  customerTypeId: ICustomer;
   travelFromId: number;
   travelToId: number;
   unitPrice: string;

@@ -29,8 +29,8 @@ export class ScheduleListComponent implements OnInit {
   }
 
   parseOffsetMlsToTime(offTime: number): string {
-
-    return moment(offTime).format('HH:mm YYYY-MM-DD');
+    const time = this.today.valueOf() + offTime;
+    return moment(time).format('HH:mm YYYY-MM-DD');
   }
 
   list() {
