@@ -83,36 +83,6 @@
             </nz-form-item>
           </div>
         </div>
-
-        <div nz-row [nzGutter]="12">
-          <div nz-col>
-            <nz-form-item *ngFor="let control of listOfControl; let i = index">
-              <nz-form-control
-                [nzXs]="24"
-                [nzSm]="20"
-                [nzOffset]="i == 0 ? 0 : 4"
-                nzErrorTip="Please input passenger's name or delete this field."
-              >
-                <input
-                  class="passenger-input"
-                  nz-input
-                  placeholder="placeholder"
-                  [attr.id]="control.id"
-                  [formControlName]="control.controlInstance"
-                />
-                <i nz-icon nzType="minus-circle-o" class="dynamic-delete-button" (click)="removeField(control, $event)"></i>
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-              <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 20, offset: 4 }">
-                <button nz-button nzType="dashed" class="add-button" (click)="addField($event)">
-                  <i nz-icon nzType="plus"></i>
-                  Add field
-                </button>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-        </div>
       </form>
     </section>
   </div>
