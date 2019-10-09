@@ -75,10 +75,109 @@
             </ng-container>
           </div>
 
-          <div nz-col [nzMd]="24">
-            <nz-form-item>
-              <nz-form-control style="text-align: center; margin-left: 0">
-                <button nz-button nzType="primary" (click)="onSubmit()">Submit</button>
+          <div nz-col [nzMd]="12">
+            <ng-container *ngIf="orderForm.get('paidStatus') as paidStataus">
+              <nz-form-item>
+                <nz-form-label><strong>Hình thức</strong></nz-form-label>
+                <nz-select [formControl]="paidStataus" nzPlaceHolder="Hình thức thanh toán">
+                  <nz-option nzValue="1" nzLabel="Đã thanh toán"></nz-option>
+                  <nz-option nzValue="2" nzLabel="Chưa thanh toán"></nz-option>
+                </nz-select>
+              </nz-form-item>
+            </ng-container>
+          </div>
+
+        </div>
+        <div nz-row [nzGutter]="4">
+          <ng-container *ngIf="helper.getAsFormArray(orderForm, 'orderDetailRequest') as orderDetailPartForm">
+            <nz-collapse>
+              <ng-container formArrayName="orderDetailRequest"
+                            *ngFor="let orderDetailPartFormControl of orderDetailPartForm.controls; let i = index">
+                <nz-collapse-panel
+                  [nzHeader]="'Người đặt ' + (i + 1)"
+                  [nzActive]="true"
+                  [formGroupName]="i"
+                  [nzExtra]="extraTemplate"
+                >
+                  <div nz-col [nzXs]="24" [nzMd]="8">
+                    <nz-form-item *ngIf="orderDetailPartFormControl.get('vehicleCategoryId') as vehicleCategoryId">
+                      <nz-form-label>Thể loại xe <strong class="color-danger">*</strong></nz-form-label>
+                      <nz-form-control nzHasFeedback [nzErrorTip]="vehicleIdValidateTip">
+                        <app-vehicle-category-selector [formControl]="vehicleCategoryId"></app-vehicle-category-selector>
+                        <ng-template #vehicleIdValidateTip>
+                          Hãy chọn điểm cuối
+                        </ng-template>
+                      </nz-form-control>
+                    </nz-form-item>
+                  </div>
+
+                  <div nz-col [nzXs]="24" [nzMd]="8" style="height: 103px">
+                      <nz-form-item *ngIf="orderDetailPartFormControl.get('quantity') as quantity">
+                        <nz-form-label style="margin-bottom: 4px">Chất lượng <strong class="color-danger">*</strong></nz-form-label>
+                        <nz-select [formControl]="quantity" nzPlaceHolder="Chất lượng xe">
+                          <nz-option nzValue="1" nzLabel="Tốt"></nz-option>
+                          <nz-option nzValue="2" nzLabel="Trung bình"></nz-option>
+                        </nz-select>
+                      </nz-form-item>
+                  </div>
+
+                  <div nz-col [nzXs]="24" [nzMd]="8" style="height: 103px">
+                      <nz-form-item *ngIf="orderDetailPartFormControl.get('customerTypeId') as customerTypeId">
+                        <nz-form-label >Khách hàng <strong class="color-danger">*</strong></nz-form-label>
+                        <nz-form-control nzHasFeedback [nzErrorTip]="customerTypeIdValidateTip">
+                          <app-customer-type-selector [formControl]="customerTypeId"></app-customer-type-selector>
+                          <ng-template #customerTypeIdValidateTip>
+                            Hãy chọn thể loại khách
+                          </ng-template>
+                        </nz-form-control>
+                      </nz-form-item>
+                  </div>
+
+                  <div nz-col [nzXs]="24" [nzMd]="12">
+                    <nz-form-item *ngIf="orderDetailPartFormControl.get('travelFromId') as travelFromId">
+                      <nz-form-label>Điểm đầu <strong class="color-danger">*</strong></nz-form-label>
+                      <nz-form-control nzHasFeedback [nzErrorTip]="fromIdValidateTip">
+                        <app-region-selector [formControl]="travelFromId"></app-region-selector>
+                        <ng-template #fromIdValidateTip>
+                          Hãy chọn điểm đầu
+                        </ng-template>
+                      </nz-form-control>
+                    </nz-form-item>
+                  </div>
+
+                  <div nz-col [nzXs]="24" [nzMd]="12">
+                    <nz-form-item *ngIf="orderDetailPartFormControl.get('travelToId') as travelToId">
+                      <nz-form-label>Điểm cuối <strong class="color-danger">*</strong></nz-form-label>
+                      <nz-form-control nzHasFeedback [nzErrorTip]="toIdValidateTip">
+                        <app-region-selector [formControl]="travelToId"></app-region-selector>
+                        <ng-template #toIdValidateTip>
+                          Hãy chọn điểm cuối
+                        </ng-template>
+                      </nz-form-control>
+                    </nz-form-item>
+                  </div>
+
+                  <ng-template #extraTemplate>
+                    <i nz-icon nzType="minus-circle-o" class="dynamic-delete-button" (click)="removeField(i)"></i>
+                  </ng-template>
+                </nz-collapse-panel>
+              </ng-container>
+            </nz-collapse>
+          </ng-container>
+
+          <div nz-col [nzXs]="24">
+            <nz-form-item style="margin-top: 2em" nzJustify="center">
+              <nz-form-control>
+                <button nz-button class="w-50" type="button" (click)="addField($event)" style="margin-right: 1em">
+                  Thêm khách
+                </button>
+                <button nz-button
+                        nzType="primary"
+                        class="w-50"
+                        [nzLoading]="isSubmit"
+                        (click)="onSubmit()"
+                        ><i nz-icon type="save"></i>Lưu
+                </button>
               </nz-form-control>
             </nz-form-item>
           </div>

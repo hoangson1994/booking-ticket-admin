@@ -6,6 +6,7 @@ import {HelperService} from '../../../shared/services/helper.service';
 import {finalize} from 'rxjs/operators';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {IVehicleCategory} from '../../../interfaces/vehicle-category.interface';
+import {ERouters} from '../../../resources/static.resource';
 
 @Component({
   selector: 'app-vehicle-category-form',
@@ -28,6 +29,11 @@ export class VehicleCategoryFormComponent implements OnInit {
     private router: Router
   ) {
     this.form = this.fb.group(vehicleService.formControlVehicleCategory);
+
+  }
+
+  ngOnInit() {
+    // activatedroute
     this.activatedRoute.params.subscribe({
       next: value => {
         this.id = value.id;
@@ -40,10 +46,6 @@ export class VehicleCategoryFormComponent implements OnInit {
       this.isSubmit = false;
       this.selectVehicleCategory(this.id);
     }
-  }
-
-  ngOnInit() {
-    // activatedroute
   }
 
   selectVehicleCategory(id) {
@@ -65,6 +67,7 @@ export class VehicleCategoryFormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.helper.setDirtyAForm(this.form);
     if (this.form.invalid) {
       return;
     }
@@ -75,6 +78,7 @@ export class VehicleCategoryFormComponent implements OnInit {
         {
           next: val => {
             this.notify.success('Thành công', 'Tạo nhóm xe thành công');
+            this.router.navigate(['/', ERouters.vehicles, ERouters.vehicle_category_list]);
           },
           error: err => {
             this.helper.handleError(err);
@@ -84,6 +88,7 @@ export class VehicleCategoryFormComponent implements OnInit {
   }
 
   onEdit() {
+    this.helper.setDirtyAForm(this.form);
     if (this.form.invalid) {
       return;
     }
@@ -97,7 +102,7 @@ export class VehicleCategoryFormComponent implements OnInit {
       .subscribe({
         next: value => {
           this.notify.success('Thành công', 'Sửa nhóm xe thành công');
-          this.router.navigate(['/vehicles/vehicle-category-list']);
+          this.router.navigate(['/', ERouters.vehicles, ERouters.vehicle_category_list]);
         }, error: err => {
           this.helper.handleError(err);
         }

@@ -9,8 +9,8 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {NzNotificationService} from 'ng-zorro-antd';
 import {finalize} from 'rxjs/operators';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import * as moment from 'moment';
 import {ISchedule} from '../../../interfaces/schedule.interface';
+import {ERouters} from '../../../resources/static.resource';
 
 @Component({
   selector: 'app-schedules-form',
@@ -61,6 +61,7 @@ export class SchedulesFormComponent implements OnInit {
       .subscribe({
         next: value => {
           this.notify.success('Thành công', 'Tạo lịch thành công');
+          this.router.navigate(['/', ERouters.schedules, ERouters.list_schedule]);
         },
         error: err => {
           this.helper.handleError(err);
@@ -75,7 +76,6 @@ export class SchedulesFormComponent implements OnInit {
         next: value => {
           this.selectedSchedule = value;
           this.helper.setValueToForm(this.form, value);
-          console.log(value);
         },
         error: err => {
           this.helper.handleError(err);
@@ -85,13 +85,16 @@ export class SchedulesFormComponent implements OnInit {
 
   onEdit() {
     this.helper.setDirtyAForm(this.form);
+    if (this.form.invalid) {
+      return;
+    }
     this.isPost = true;
     this.scheduleService.editSchedule(this.id, this.form.value)
       .pipe(finalize(() => this.isPost = false))
       .subscribe({
         next: value => {
           this.notify.success('Thành công', 'Sửa lịch thành công');
-          // this.router.navigate(['/vehicles/vehicle-list']);
+          this.router.navigate(['/', ERouters.schedules, ERouters.list_schedule]);
         },
         error: err => {
           this.helper.handleError(err);

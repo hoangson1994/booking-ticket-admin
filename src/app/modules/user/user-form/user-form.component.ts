@@ -8,6 +8,7 @@ import {getLocaleTimeFormat} from '@angular/common';
 import {NzNotificationService} from 'ng-zorro-antd';
 import {finalize} from 'rxjs/operators';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ERouters} from '../../../resources/static.resource';
 
 @Component({
   selector: 'app-user-form',
@@ -30,6 +31,10 @@ export class UserFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {
+
+  }
+
+  ngOnInit() {
     this.form = this.fb.group(this.userService.formControl);
     this.activatedRoute.params.subscribe({
       next: value => {
@@ -45,17 +50,18 @@ export class UserFormComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-
-  }
-
   onSubmit() {
+    this.helper.setDirtyAForm(this.form);
+    if (this.form.invalid) {
+      return;
+    }
     this.isPost = true;
     this.userService.createUser(this.form.value)
       .pipe(finalize(() => this.isPost = false))
       .subscribe({
         next: value => {
           this.notify.success('Thành công', 'Thêm nhân viên thành công');
+          this.router.navigate(['/', ERouters.user, ERouters.list_user]);
         },
         error: err => {
           this.helper.handleError(err);

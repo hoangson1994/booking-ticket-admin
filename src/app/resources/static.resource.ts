@@ -1,6 +1,6 @@
 export const DOMAIN = 'http://34.87.118.132/';
 // export const DOMAIN = 'http://localhost:8000/';
-export const API_URL = `${DOMAIN}api/` ;
+export const API_URL = `${DOMAIN}api/`;
 export const BASE_URL = `${DOMAIN}api/admin/`;
 
 export const ACCESS_TOKEN_SECRET_KEY = '12asf47asj123kfhc17mxzbja0131klj';
@@ -8,7 +8,8 @@ export const ACCESS_TOKEN_SECRET_KEY = '12asf47asj123kfhc17mxzbja0131klj';
 export const AUTH_STATE_KEY = 'AJKFSH3Q897ASKJBVXZZ462187asjfba';
 
 export enum ERouters {
-  users = 'users',
+  user = 'user',
+  list_user = 'list-user',
   transactions = 'transactions',
   vip_packages = 'vip-packages',
   banners = 'banners',
@@ -30,5 +31,12 @@ export enum ERouters {
   member_groups = 'member-groups',
   bank_accounts = 'bank-accounts',
   schedule_templates = 'schedule-templates',
-  voyages = 'voyages'
+  voyages = 'voyages',
+  vehicles = 'vehicles',
+  vehicle_list = 'vehicle-list',
+  vehicle_category_list = 'vehicle-category-list',
+  schedules = 'schedules',
+  list_schedule = 'list-schedule',
+  order = 'order',
+  list_order = 'list-order',
 }

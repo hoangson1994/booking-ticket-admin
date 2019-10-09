@@ -1,0 +1,13 @@
+<nz-select class="w-100"
+           [(ngModel)]="model"
+           nzPlaceHolder="Chọn thể loại khách"
+           nzShowSearch
+           nzAllowClear
+>
+  <ng-container *ngFor="let customerType of datas">
+    <nz-option [nzValue]="customerType.id"
+               [nzLabel]="customerType.name"
+    ></nz-option>
+  </ng-container>
+
+</nz-select>

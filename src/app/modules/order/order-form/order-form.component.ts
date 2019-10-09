@@ -3,8 +3,11 @@ import {OrderService} from '../order.service';
 import {ISchedule} from 'src/app/interfaces/schedule.interface';
 import {finalize} from 'rxjs/operators';
 import {HelperService} from '../../../shared/services/helper.service';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
+import {ICustomerType} from '../../../interfaces/customer-type.interface';
+import {NzNotificationService} from 'ng-zorro-antd';
+import {ERouters} from '../../../resources/static.resource';
 
 @Component({
   selector: 'app-order-form',
@@ -13,6 +16,7 @@ import {Router} from '@angular/router';
 })
 export class OrderFormComponent implements OnInit {
   datasSchedule: ISchedule[];
+  datasCustomerType: ICustomerType[];
   orderForm: FormGroup;
   listOfControl: Array<{ id: number; controlInstance: string }> = [];
   tabs = [
@@ -32,12 +36,14 @@ export class OrderFormComponent implements OnInit {
   @Input()
   scheduleTemplateId: number;
   isLoding: boolean;
+  isSubmit: boolean;
 
   constructor(
     private orderService: OrderService,
     private helper: HelperService,
     private form: FormBuilder,
-    private router: Router
+    private router: Router,
+    private notify: NzNotificationService
   ) {
   }
 
@@ -59,7 +65,7 @@ export class OrderFormComponent implements OnInit {
             this.datasSchedule = value;
           },
           error => {
-            console.log(error);
+            this.helper.handleError(error);
           }
         );
     }
@@ -67,45 +73,42 @@ export class OrderFormComponent implements OnInit {
     this.orderService.listCustomerType()
       .subscribe({
         next: value => {
-          console.log(value);
+          this.datasCustomerType = value;
         }, error: err => {
           this.helper.handleError(err);
         }
       });
   }
 
-
   onSubmit() {
-    console.log(this.orderForm.value);
+    this.helper.setDirtyAForm(this.orderForm);
+    if (this.orderForm.invalid) {
+      return;
+    }
+    this.isSubmit = true;
+
+    this.orderService.createOrder(this.orderForm.value)
+      .pipe(finalize(() => this.isSubmit = false))
+      .subscribe({
+        next: value => {
+          this.notify.success('Thành công', 'Đặt xe thành công');
+          this.router.navigate(['/', ERouters.order, ERouters.list_order]);
+        },
+        error: err => this.helper.handleError(err)
+      });
   }
 
   addField(e?: MouseEvent): void {
-    if (e) {
-      e.preventDefault();
-    }
-    const id = this.listOfControl.length > 1 ? this.listOfControl[this.listOfControl.length - 1].id + 1 : 0;
-
-    const control = {
-      id,
-      controlInstance: `passenger${id}`
-    };
-
-    const index = this.listOfControl.push(control);
-    console.log(this.listOfControl[this.listOfControl.length - 1]);
-    this.orderForm.addControl(
-      this.listOfControl[index - 1].controlInstance,
-      new FormControl(null, Validators.required)
-    );
+    const formArr = this.orderForm.get('orderDetailRequest') as FormArray;
+    formArr.push(this.orderService.addOrdeDetailPartFormGroup());
   }
 
-  removeField(i: { id: number; controlInstance: string }, e: MouseEvent): void {
-    e.preventDefault();
-    if (this.listOfControl.length > 1) {
-      const index = this.listOfControl.indexOf(i);
-      this.listOfControl.splice(index, 1);
-      console.log(this.listOfControl);
-      this.orderForm.removeControl(i.controlInstance);
+  removeField(i): void {
+    const voyagePartForm = this.orderForm.get('orderDetailRequest') as FormArray;
+    if (voyagePartForm.length < 2) {
+      return;
     }
+    voyagePartForm.removeAt(i);
   }
 
   getFormControl(name: string): AbstractControl {

@@ -5,6 +5,7 @@ import {finalize} from 'rxjs/operators';
 import {HelperService} from '../../../shared/services/helper.service';
 import {NzNotificationService} from 'ng-zorro-antd';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ERouters} from '../../../resources/static.resource';
 
 @Component({
   selector: 'app-vehicles-form',
@@ -45,6 +46,7 @@ export class VehiclesFormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.helper.setDirtyAForm(this.form);
     if (this.form.invalid) {
       return;
     }
@@ -56,6 +58,7 @@ export class VehiclesFormComponent implements OnInit {
       .subscribe({
         next: value => {
           this.notify.success('Thành công', 'Thêm xe thành công');
+          this.router.navigate(['/', ERouters.vehicles, ERouters.vehicle_list]);
         },
         error: err => {
           this.helper.handleError(err);
@@ -86,7 +89,7 @@ export class VehiclesFormComponent implements OnInit {
       .subscribe({
         next: value => {
           this.notify.success('Thành công', 'Sửa xe thành công');
-          this.router.navigate(['/vehicles/vehicle-list']);
+          this.router.navigate(['/', ERouters.vehicles, ERouters.vehicle_list]);
         },
         error: err => {
           this.helper.handleError(err);

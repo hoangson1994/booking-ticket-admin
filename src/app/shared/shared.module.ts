@@ -17,6 +17,7 @@ import { VehicleSelectorComponent } from './selector/vehicle-selector/vehicle-se
 import { ScheduleTemplateSelectorComponent } from './selector/schedule-template-selector/schedule-template-selector.component';
 import { TabContentOrderComponent } from './tabs/tab-content-order/tab-content-order.component';
 import { ScheduleSelectorComponent } from './selector/schedule-selector/schedule-selector.component';
+import { CustomerTypeSelectorComponent } from './selector/customer-type-selector/customer-type-selector.component';
 
 @NgModule({
     imports: [
@@ -40,7 +41,8 @@ import { ScheduleSelectorComponent } from './selector/schedule-selector/schedule
         VehicleSelectorComponent,
         ScheduleTemplateSelectorComponent,
         TabContentOrderComponent,
-        ScheduleSelectorComponent
+        ScheduleSelectorComponent,
+        CustomerTypeSelectorComponent
     ],
   exports: [
     CommonModule,
@@ -61,7 +63,8 @@ import { ScheduleSelectorComponent } from './selector/schedule-selector/schedule
     VehicleSelectorComponent,
     ScheduleTemplateSelectorComponent,
     TabContentOrderComponent,
-    ScheduleSelectorComponent
+    ScheduleSelectorComponent,
+    CustomerTypeSelectorComponent
   ]
 })
 export class SharedModule {
